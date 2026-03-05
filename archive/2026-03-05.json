@@ -1,0 +1,62 @@
+{
+  "issue": 1,
+  "date": "2026-03-05",
+  "generated_at": "2026-03-05T22:04:42.166Z",
+  "briefing": {
+    "headline": "Wikipedia's read-only mode following admin account breach highlights ongoing security vulnerabilities in major platforms.",
+    "theme": "Security Breaches",
+    "top_stories": [
+      {
+        "rank": 1,
+        "title": "Wikipedia in read-only mode following mass admin account compromise",
+        "why_it_matters": "This incident underscores the critical need for robust security practices in online platforms, especially those relying on volunteer administration.",
+        "signal_strength": "high",
+        "url": "https://www.wikimediastatus.net",
+        "hn_url": "https://news.ycombinator.com/item?id=47267868"
+      },
+      {
+        "rank": 2,
+        "title": "GPT-5.4",
+        "why_it_matters": "The introduction of GPT-5.4 signifies a substantial leap in AI capabilities, which could reshape applications across industries.",
+        "signal_strength": "high",
+        "url": "https://openai.com/index/introducing-gpt-5-4/",
+        "hn_url": "https://news.ycombinator.com/item?id=47267868"
+      },
+      {
+        "rank": 3,
+        "title": "Nvidia PersonaPlex 7B on Apple Silicon: Full-Duplex Speech-to-Speech in Swift",
+        "why_it_matters": "This advancement in speech technology showcases the potential for more natural human-computer interactions, particularly for Apple users.",
+        "signal_strength": "medium",
+        "url": "https://blog.ivan.digital/nvidia-personaplex-7b-on-apple-silicon-full-duplex-speech-to-speech-in-native-swift-with-mlx-0aa5276f2e23",
+        "hn_url": "https://news.ycombinator.com/item?id=47267868"
+      },
+      {
+        "rank": 4,
+        "title": "A GitHub Issue Title Compromised 4k Developer Machines",
+        "why_it_matters": "This incident highlights the risks associated with AI tools that can inadvertently introduce vulnerabilities into development environments.",
+        "signal_strength": "medium",
+        "url": "https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another",
+        "hn_url": "https://news.ycombinator.com/item?id=47267868"
+      },
+      {
+        "rank": 5,
+        "title": "The Government Uses Targeted Advertising to Track Your Location",
+        "why_it_matters": "This revelation raises significant concerns about privacy and the ethical implications of targeted advertising by government entities.",
+        "signal_strength": "medium",
+        "url": "https://www.eff.org/deeplinks/2026/03/targeted-advertising-gives-your-location-government-just-ask-cbp",
+        "hn_url": "https://news.ycombinator.com/item?id=47267868"
+      }
+    ],
+    "github_spotlight": {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "why_interesting": "As an open-source platform for learning programming, freeCodeCamp continues to empower developers worldwide with free resources and a supportive community.",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp"
+    },
+    "build_idea": "Develop a security tool that monitors and alerts users of potential vulnerabilities in their admin accounts and tools, inspired by the Wikipedia breach.",
+    "one_liner": "Security vulnerabilities expose major platforms, while AI advancements promise transformative tech—it's a critical moment in the tech landscape."
+  },
+  "raw": {
+    "hn_count": 19,
+    "github_count": 10
+  }
+}
