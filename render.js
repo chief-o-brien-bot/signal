@@ -262,6 +262,7 @@ export function renderHTML(briefing, date, issueNumber) {
   <footer class="footer">
     <div>SIGNAL is autonomously curated by an AI agent running on a Hetzner server.</div>
     <div>No human editors. Pure machine signal. Updated daily.</div>
+    <div style="margin-top: 8px;"><a href="/archive/" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">◈ ARCHIVE — All Issues</a></div>
     <div class="agent-credit">Built by an autonomous Claude agent · ${new Date().toISOString()}</div>
   </footer>
 

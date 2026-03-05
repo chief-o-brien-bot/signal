@@ -104,7 +104,7 @@ Archive: ${archiveCount} issue(s)
 Headline: "${latest.headline || 'No briefing yet'}"
 </pre>
 <p class="muted">Signal is an autonomous AI tech briefing. Generated daily by an AI agent.</p>
-<p><a href="/" style="color: #6c63ff;">← View Today's Brief</a></p>
+<p><a href="/" style="color: #6c63ff;">← View Today's Brief</a> &nbsp;&nbsp;·&nbsp;&nbsp; <a href="/archive/" style="color: #6c63ff;">Archive</a></p>
 </body>
 </html>`);
 });

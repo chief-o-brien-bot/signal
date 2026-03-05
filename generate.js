@@ -84,6 +84,24 @@ async function main() {
   console.log(`[Signal] Issue #${issueNumber} saved to ${outputDir}/index.html`);
   console.log(`[Signal] ONE LINER: ${briefing.one_liner}`);
 
+  // Rebuild archive index
+  try {
+    const { buildArchiveIndex } = await import('./archive.js');
+    buildArchiveIndex();
+    console.log('[Signal] Archive index rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Archive index rebuild failed:', e.message);
+  }
+
+  // Send Telegram notification
+  try {
+    const { notifyTelegram } = await import('./telegram_notify.js');
+    await notifyTelegram(summary, briefing);
+    console.log('[Signal] Telegram notification sent.');
+  } catch (e) {
+    console.warn('[Signal] Telegram notification failed:', e.message);
+  }
+
   return summary;
 }
 
