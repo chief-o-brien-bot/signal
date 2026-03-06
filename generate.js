@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt } from './fetch.js';
+import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt, fetchTechNewsRSS } from './fetch.js';
 import { generateBriefing } from './analyze.js';
 import { renderHTML } from './render.js';
 import { generateOgImage } from './og_image.js';
@@ -35,7 +35,7 @@ async function main() {
 
   // Fetch all data sources in parallel for speed
   console.log('[Signal] Fetching all data sources in parallel...');
-  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles, phPosts] = await Promise.all([
+  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles, phPosts, techNews] = await Promise.all([
     fetchHackerNews(20).catch(e => { console.warn('[Signal] HN failed:', e.message); return []; }),
     fetchGitHubTrending().catch(e => { console.warn('[Signal] GitHub failed:', e.message); return []; }),
     fetchHNNew(10).catch(e => { console.warn('[Signal] HN New failed:', e.message); return []; }),
@@ -43,9 +43,10 @@ async function main() {
     fetchArXiv(10).catch(e => { console.warn('[Signal] arXiv failed:', e.message); return []; }),
     fetchDevTo(15).catch(e => { console.warn('[Signal] Dev.to failed:', e.message); return []; }),
     fetchProductHunt(10).catch(e => { console.warn('[Signal] ProductHunt failed:', e.message); return []; }),
+    fetchTechNewsRSS(20).catch(e => { console.warn('[Signal] Tech News RSS failed:', e.message); return []; }),
   ]);
 
-  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt`);
+  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt, ${techNews.length} TechNews`);
 
   // Collect recent themes + story titles to avoid repetition
   const recentThemes = [];
@@ -74,7 +75,7 @@ async function main() {
 
   // Analyze
   console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles);
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles, techNews);
   console.log('[Signal] Briefing generated:', briefing.headline);
 
   // Generate OG image for social sharing
@@ -116,6 +117,7 @@ async function main() {
       arxiv_count: arxivPapers.length,
       devto_count: devtoArticles.length,
       producthunt_count: phPosts.length,
+      technews_count: techNews.length,
     }
   };
   // Save by date (latest for this date) AND by issue number (never overwritten)

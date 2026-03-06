@@ -1,5 +1,71 @@
 [
   {
+    "checked_at": "2026-03-06T11:05:41.159Z",
+    "sources": {
+      "Ars Technica": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 40,
+        "last_checked": "2026-03-06T11:05:41.207Z"
+      },
+      "The Verge": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 40,
+        "last_checked": "2026-03-06T11:05:41.208Z"
+      },
+      "ProductHunt": {
+        "status": "empty",
+        "count": 0,
+        "latency_ms": 49,
+        "last_checked": "2026-03-06T11:05:41.213Z"
+      },
+      "TechCrunch": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 50,
+        "last_checked": "2026-03-06T11:05:41.216Z"
+      },
+      "arXiv": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 126,
+        "last_checked": "2026-03-06T11:05:41.289Z"
+      },
+      "Hacker News": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 254,
+        "last_checked": "2026-03-06T11:05:41.413Z"
+      },
+      "Lobste.rs": {
+        "status": "healthy",
+        "count": 25,
+        "latency_ms": 332,
+        "last_checked": "2026-03-06T11:05:41.494Z"
+      },
+      "GitHub Trending": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 370,
+        "last_checked": "2026-03-06T11:05:41.531Z"
+      },
+      "Dev.to": {
+        "status": "healthy",
+        "count": 15,
+        "latency_ms": 402,
+        "last_checked": "2026-03-06T11:05:41.565Z"
+      },
+      "Show HN": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 1563,
+        "last_checked": "2026-03-06T11:05:42.728Z"
+      }
+    },
+    "total_ms": 1570
+  },
+  {
     "checked_at": "2026-03-06T10:03:33.396Z",
     "sources": {
       "arXiv": {

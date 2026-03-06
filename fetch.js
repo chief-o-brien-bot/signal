@@ -168,6 +168,53 @@ export async function fetchProductHunt(count = 10) {
   }
 }
 
+// Fetch mainstream tech news from RSS feeds (TechCrunch, Ars Technica, The Verge, Wired, MIT TR)
+export async function fetchTechNewsRSS(count = 20) {
+  const feeds = [
+    { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+    { name: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index' },
+    { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml' },
+    { name: 'Wired', url: 'https://www.wired.com/feed/rss' },
+    { name: 'MIT Tech Review', url: 'https://www.technologyreview.com/feed/' },
+  ];
+
+  const allItems = [];
+
+  await Promise.all(feeds.map(async feed => {
+    try {
+      const response = await axios.get(feed.url, {
+        headers: { 'User-Agent': 'Signal-Agent/1.0; +https://chief-o-brien-bot.github.io/signal/' },
+        timeout: 10000,
+      });
+
+      const parsed = await parseStringPromise(response.data, { explicitArray: true });
+
+      // Handle both RSS (channel.item) and Atom (feed.entry)
+      const channel = parsed?.rss?.channel?.[0] || parsed?.feed;
+      const items = channel?.item || channel?.entry || [];
+
+      for (const item of items.slice(0, 5)) {
+        const title = (item.title?.[0]?._ || item.title?.[0] || '').replace(/<[^>]*>/g, '').trim();
+        const url = item.link?.[0]?._ || item.link?.[0]?.['$']?.href || item.link?.[0] || '';
+        const description = (item.description?.[0] || item.summary?.[0]?._ || item.summary?.[0] || '')
+          .replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').slice(0, 200).trim();
+        const pubDate = item.pubDate?.[0] || item.published?.[0] || '';
+
+        if (title && url && typeof url === 'string') {
+          allItems.push({ title, url, description, source: feed.name, pubDate });
+        }
+      }
+    } catch (err) {
+      // Skip failing feeds silently
+    }
+  }));
+
+  // Sort by publication date (newest first) and return top N
+  return allItems
+    .filter(i => i.title && i.url)
+    .slice(0, count);
+}
+
 // Fetch Dev.to top articles (last 7 days)
 export async function fetchDevTo(count = 15) {
   try {

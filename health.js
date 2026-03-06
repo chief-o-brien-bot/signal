@@ -56,6 +56,27 @@ export async function checkSourceHealth() {
       const r = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&hitsPerPage=10');
       const d = await r.json();
       return (d.hits || []).length;
+    },
+    'TechCrunch': async () => {
+      const r = await fetch('https://techcrunch.com/feed/', {
+        headers: { 'User-Agent': 'Signal-Agent/1.0' }
+      });
+      const text = await r.text();
+      return (text.match(/<item>/g) || []).length;
+    },
+    'Ars Technica': async () => {
+      const r = await fetch('https://feeds.arstechnica.com/arstechnica/index', {
+        headers: { 'User-Agent': 'Signal-Agent/1.0' }
+      });
+      const text = await r.text();
+      return (text.match(/<item>/g) || []).length;
+    },
+    'The Verge': async () => {
+      const r = await fetch('https://www.theverge.com/rss/index.xml', {
+        headers: { 'User-Agent': 'Signal-Agent/1.0' }
+      });
+      const text = await r.text();
+      return (text.match(/<entry>/g) || []).length;
     }
   };
 

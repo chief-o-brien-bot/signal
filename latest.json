@@ -1,9 +1,9 @@
 {
-  "issue": 11,
+  "issue": 12,
   "date": "2026-03-06",
-  "headline": "Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.",
-  "theme": "Digital Security",
-  "one_liner": "Today's tech landscape reveals vulnerabilities in trusted platforms, highlights the efficiency of Rust and AI in productivity tools, and reshapes our labor markets.",
+  "headline": "Amazon's new AI platform aims to transform healthcare scheduling.",
+  "theme": "AI in Healthcare",
+  "one_liner": "Amazon is set to revolutionize healthcare scheduling with AI, amid challenges in AI development and major shifts in tech workforce dynamics.",
   "story_count": 5,
   "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
 }

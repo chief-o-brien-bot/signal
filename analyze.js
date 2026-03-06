@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = []) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = [], techNews = []) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
   ).join('\n');
@@ -41,6 +41,12 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
         `${i+1}. ${p.title}\n   ${p.description || ''}\n   URL: ${p.url}`
       ).join('\n')
     : '(no posts fetched)';
+
+  const techNewsText = techNews.length > 0
+    ? techNews.slice(0, 12).map((a, i) =>
+        `${i+1}. [${a.source}] ${a.title}\n   ${a.description?.slice(0, 100) || ''}\n   URL: ${a.url}`
+      ).join('\n')
+    : '(no tech news fetched)';
 
   const themeAvoidance = recentThemes.length > 0
     ? `\n⚠️ THEME DIVERSITY: The last ${recentThemes.length} issues used these themes: [${recentThemes.join(', ')}]. DO NOT repeat these themes. Choose a genuinely different angle from today's data.\n`
@@ -76,6 +82,9 @@ ${devtoText}
 ProductHunt top launches (today):
 ${phText}
 
+Mainstream tech media (TechCrunch, Ars Technica, The Verge, Wired, MIT Tech Review):
+${techNewsText}
+
 Produce a JSON response with this exact structure:
 {
   "headline": "One punchy sentence that captures the most important thing happening in tech today",
@@ -106,7 +115,7 @@ Produce a JSON response with this exact structure:
   "one_liner": "A tweet-worthy one-liner summary of today's tech world (<280 chars)"
 }
 
-Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, and ProductHunt — pick whichever stories are most interesting regardless of source. For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. ProductHunt posts can appear in top_stories if they are genuinely interesting product launches.
+Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, ProductHunt, and mainstream tech media (TechCrunch, Ars Technica, The Verge, Wired, MIT Tech Review) — pick whichever stories are most interesting regardless of source. For the "source" field use: "hn", "lobsters", "devto", "producthunt", "technews". For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. Mainstream tech media stories can be excellent signal if they cover genuinely important developments.
 
 Return ONLY the JSON object, no markdown fences or extra text.`;
 
