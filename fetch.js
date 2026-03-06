@@ -56,6 +56,22 @@ export async function fetchGitHubTrending() {
   }));
 }
 
+// Fetch Lobste.rs hottest stories
+export async function fetchLobsters(count = 20) {
+  const response = await axios.get('https://lobste.rs/hottest.json', {
+    headers: { 'User-Agent': 'Signal-Agent/1.0' },
+  });
+
+  return response.data.slice(0, count).map(s => ({
+    title: s.title,
+    url: s.url || s.comments_url,
+    score: s.score || 0,
+    comments: s.comment_count || 0,
+    tags: s.tags || [],
+    lobste_url: s.comments_url,
+  }));
+}
+
 // Fetch HN Ask HN / Show HN for product launches
 export async function fetchHNNew(count = 10) {
   const newRes = await axios.get('https://hacker-news.firebaseio.com/v0/newstories.json');

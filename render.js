@@ -17,7 +17,7 @@ export function renderHTML(briefing, date, issueNumber) {
       </div>
       <h3><a href="${escapeHtml(story.url)}" target="_blank" rel="noopener">${escapeHtml(story.title)}</a></h3>
       <p class="take">${escapeHtml(story.why_it_matters)}</p>
-      <a class="hn-link" href="${escapeHtml(story.hn_url)}" target="_blank" rel="noopener">→ discuss on HN</a>
+      <a class="hn-link" href="${escapeHtml(story.discussion_url)}" target="_blank" rel="noopener">→ discuss on ${story.source === 'lobsters' ? 'Lobste.rs' : 'HN'}</a>
     </article>
   `).join('');
 
@@ -43,6 +43,7 @@ export function renderHTML(briefing, date, issueNumber) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signal — Issue #${issueNumber} — ${date}</title>
   <meta name="description" content="${escapeHtml(briefing.headline || 'Daily tech signal from the noise')}">
+  <link rel="alternate" type="application/rss+xml" title="Signal RSS" href="/feed.xml">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {

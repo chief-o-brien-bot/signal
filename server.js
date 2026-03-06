@@ -68,6 +68,17 @@ app.get('/archive/:date', (req, res) => {
   }
 });
 
+// RSS feed
+app.get('/feed.xml', (req, res) => {
+  const feedPath = path.join(publicDir, 'feed.xml');
+  if (fs.existsSync(feedPath)) {
+    res.setHeader('Content-Type', 'application/rss+xml; charset=utf-8');
+    res.sendFile(feedPath);
+  } else {
+    res.status(404).send('RSS feed not yet generated');
+  }
+});
+
 // Status dashboard
 app.get('/status', (req, res) => {
   let latest = {};

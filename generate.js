@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import { fetchHackerNews, fetchGitHubTrending, fetchHNNew } from './fetch.js';
+import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters } from './fetch.js';
 import { generateBriefing } from './analyze.js';
 import { renderHTML } from './render.js';
 import fs from 'fs';
@@ -44,9 +44,13 @@ async function main() {
   const hnNew = await fetchHNNew(10);
   console.log(`[Signal] Got ${hnNew.length} Show/Ask HN`);
 
+  console.log('[Signal] Fetching Lobste.rs...');
+  const lobsteStories = await fetchLobsters(20);
+  console.log(`[Signal] Got ${lobsteStories.length} Lobste.rs stories`);
+
   // Analyze
-  console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, today);
+  console.log('[Signal] Analyzing with Claude...');
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today);
   console.log('[Signal] Briefing generated:', briefing.headline);
 
   // Render
@@ -63,7 +67,7 @@ async function main() {
     date: today,
     generated_at: new Date().toISOString(),
     briefing,
-    raw: { hn_count: hnStories.length, github_count: githubRepos.length }
+    raw: { hn_count: hnStories.length, github_count: githubRepos.length, lobste_count: lobsteStories.length }
   };
   fs.writeFileSync(path.join(archiveDir, `${today}.json`), JSON.stringify(jsonData, null, 2), 'utf-8');
 
@@ -83,6 +87,15 @@ async function main() {
 
   console.log(`[Signal] Issue #${issueNumber} saved to ${outputDir}/index.html`);
   console.log(`[Signal] ONE LINER: ${briefing.one_liner}`);
+
+  // Rebuild RSS feed
+  try {
+    const { buildRssFeed } = await import('./rss.js');
+    buildRssFeed();
+    console.log('[Signal] RSS feed rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] RSS feed rebuild failed:', e.message);
+  }
 
   // Rebuild archive index
   try {
