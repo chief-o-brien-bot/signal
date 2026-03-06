@@ -1,0 +1,496 @@
+/**
+ * Signal: Landing page renderer
+ * Generates a compelling home page with value pitch + subscribe CTA + recent issues
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export function renderLandingPage(latestBriefing, latestIssueNumber, latestDate, recentIssues) {
+  const serverBase = 'http://178.104.13.79:8080';
+  const ghBase = 'https://chief-o-brien-bot.github.io/signal';
+
+  const topStories = (latestBriefing.top_stories || []).slice(0, 5);
+  const recentIssueCards = recentIssues.slice(0, 5).map(issue => {
+    const htmlFile = issue.htmlFile || `${issue.date}.html`;
+    return `
+    <a href="archive/${htmlFile}" class="issue-card">
+      <div class="issue-card-meta">
+        <span class="issue-num">#${issue.issue}</span>
+        <span class="issue-date">${issue.date}</span>
+        <span class="issue-theme">${issue.briefing?.theme || ''}</span>
+      </div>
+      <div class="issue-headline">${escapeHtml(issue.briefing?.headline || '')}</div>
+    </a>
+  `;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal — Daily AI-Curated Tech Briefing</title>
+  <meta name="description" content="One daily briefing. Curated by AI from Hacker News, GitHub, arXiv, ProductHunt and more. No noise, just signal.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Signal — Daily AI-Curated Tech Briefing">
+  <meta property="og:description" content="One briefing, every morning. AI-curated from HN, GitHub, arXiv, Dev.to, ProductHunt and more. No noise, just signal.">
+  <meta property="og:url" content="${ghBase}/">
+  <meta property="og:site_name" content="Signal">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Signal — Daily AI Tech Briefing">
+  <meta name="twitter:description" content="One briefing, every morning. No noise, just signal.">
+
+  <!-- Canonical + RSS -->
+  <link rel="canonical" href="${ghBase}/">
+  <link rel="alternate" type="application/rss+xml" title="Signal RSS" href="${ghBase}/feed.xml">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --border: #1e1e2e;
+      --text: #e2e2f0;
+      --muted: #666680;
+      --accent: #6c63ff;
+      --green: #00ff88;
+      --yellow: #ffcc00;
+      --red: #ff4455;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .logo {
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .logo span { color: var(--green); }
+    .hero-headline {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(24px, 4vw, 44px);
+      font-weight: bold;
+      line-height: 1.2;
+      color: var(--text);
+      max-width: 680px;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+    .hero-sub strong { color: var(--text); }
+
+    /* ── SUBSCRIBE FORM ─────────────────────────────── */
+    .subscribe-form {
+      display: flex;
+      gap: 8px;
+      max-width: 440px;
+      width: 100%;
+      margin-bottom: 12px;
+    }
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 16px;
+      font-family: inherit;
+      font-size: 13px;
+      border-radius: 2px;
+      outline: none;
+    }
+    .subscribe-form input[type="email"]:focus { border-color: var(--accent); }
+    .subscribe-form input[type="email"]::placeholder { color: var(--muted); }
+    .subscribe-form button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover { opacity: 0.85; }
+    .subscribe-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .subscribe-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    #subscribe-msg {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--green);
+      min-height: 18px;
+      margin-bottom: 8px;
+    }
+
+    /* ── STATS ROW ──────────────────────────────────── */
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--green);
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN CONTENT ───────────────────────────────── */
+    .main { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-left: 2px solid var(--accent);
+      padding-left: 8px;
+      margin-bottom: 24px;
+    }
+
+    /* ── TODAY'S BRIEF ──────────────────────────────── */
+    .latest-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      border-radius: 2px;
+    }
+    .latest-meta {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .latest-meta .issue-badge {
+      color: var(--accent);
+      margin-right: 8px;
+    }
+    .latest-meta .theme-badge {
+      background: var(--accent);
+      color: white;
+      padding: 1px 8px;
+      border-radius: 2px;
+      margin-left: 8px;
+    }
+    .latest-headline {
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .latest-stories {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+    .latest-stories li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .latest-stories li:last-child { border-bottom: none; }
+    .story-rank {
+      color: var(--muted);
+      font-size: 11px;
+      margin-right: 8px;
+    }
+    .story-source {
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--bg);
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .read-full-link {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    /* ── ARCHIVE CARDS ──────────────────────────────── */
+    .issues-list { margin-bottom: 48px; }
+    .issue-card {
+      display: block;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .issue-card:hover { background: none; }
+    .issue-card:hover .issue-headline { color: var(--accent); }
+    .issue-card-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .issue-num { color: var(--accent); margin-right: 12px; }
+    .issue-date { margin-right: 12px; }
+    .issue-theme {
+      background: var(--surface);
+      padding: 1px 7px;
+      border-radius: 2px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .issue-headline {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ── FEATURES ROW ───────────────────────────────── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 2px;
+    }
+    .feature-icon { font-size: 20px; margin-bottom: 10px; }
+    .feature-title {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .feature-desc { font-size: 12px; color: var(--muted); }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .subscribe-form { flex-direction: column; }
+      .stats-row { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="logo"><span>◈</span> SIGNAL</div>
+  <h1 class="hero-headline">The signal in the noise of tech</h1>
+  <p class="hero-sub">
+    Every morning, an AI scans <strong>Hacker News, GitHub, arXiv, Dev.to, ProductHunt and more</strong>
+    — then writes one sharp briefing. No curation fatigue. No newsletter bloat. Just what matters.
+  </p>
+
+  <form class="subscribe-form" id="subscribe-form">
+    <input type="email" id="email-input" placeholder="your@email.com" required>
+    <button type="submit" id="subscribe-btn">→ SUBSCRIBE</button>
+  </form>
+  <div id="subscribe-msg"></div>
+  <div class="subscribe-note">Free. One email per day. Unsubscribe anytime.</div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-num">${latestIssueNumber}</div>
+      <div class="stat-label">Issues</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Data sources</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Noise filtered</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAIN ────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- Today's Issue -->
+  <div class="section-label">Today's Brief · Issue #${latestIssueNumber} · ${latestDate}</div>
+  <div class="latest-card">
+    <div class="latest-meta">
+      <span class="issue-badge">#${latestIssueNumber}</span>
+      ${latestDate}
+      <span class="theme-badge">${escapeHtml(latestBriefing.theme || '')}</span>
+    </div>
+    <div class="latest-headline">${escapeHtml(latestBriefing.headline || '')}</div>
+    <ul class="latest-stories">
+      ${topStories.map(s => `
+        <li>
+          <span class="story-rank">${s.rank}.</span>
+          <a href="${escapeHtml(s.discussion_url || s.url || '#')}" target="_blank" rel="noopener">
+            ${escapeHtml(s.title || '')}
+          </a>
+          <span class="story-source">${s.source || ''}</span>
+        </li>
+      `).join('')}
+    </ul>
+    <a href="archive/${latestDate}.html" class="read-full-link">READ FULL ISSUE →</a>
+  </div>
+
+  <!-- Recent Issues -->
+  ${recentIssues.length > 1 ? `
+  <div class="section-label">Archive</div>
+  <div class="issues-list">
+    ${recentIssueCards}
+    <div style="padding: 16px 0;">
+      <a href="archive/" style="font-size: 12px; color: var(--muted);">View all issues →</a>
+    </div>
+  </div>
+  ` : ''}
+
+  <!-- What's inside -->
+  <div class="section-label">What you get</div>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📡</div>
+      <div class="feature-title">7 data sources</div>
+      <div class="feature-desc">HN · GitHub Trending · Lobsters · arXiv · Dev.to · ProductHunt · Show HN</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI curation</div>
+      <div class="feature-desc">GPT-4 picks the signal. No clickbait. No SEO slop. One editorial theme per issue.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Daily, 6 AM UTC</div>
+      <div class="feature-desc">Fresh every morning. Auto-generated, auto-deployed, auto-delivered.</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔓</div>
+      <div class="feature-title">Always free</div>
+      <div class="feature-desc">No paywall. No tracking. Built by an autonomous AI agent as a public good.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>
+    <a href="archive/">Archive</a> &nbsp;·&nbsp;
+    <a href="feed.xml">RSS</a> &nbsp;·&nbsp;
+    <a href="sitemap.xml">Sitemap</a> &nbsp;·&nbsp;
+    <a href="https://github.com/chief-o-brien-bot/signal" target="_blank">GitHub</a>
+  </p>
+  <p style="margin-top: 8px;">SIGNAL — Autonomous AI tech curation · Generated ${new Date().toISOString()}</p>
+</footer>
+
+<script>
+  const SUBSCRIBE_URL = window.location.hostname === 'chief-o-brien-bot.github.io'
+    ? 'http://178.104.13.79:8080/subscribe'
+    : '/subscribe';
+
+  document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value.trim();
+    const btn = document.getElementById('subscribe-btn');
+    const msg = document.getElementById('subscribe-msg');
+
+    if (!email) return;
+    btn.disabled = true;
+    btn.textContent = '...';
+    msg.style.display = 'none';
+
+    try {
+      const resp = await fetch(SUBSCRIBE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await resp.json();
+      if (resp.ok) {
+        msg.textContent = '✓ SUBSCRIBED — SEE YOU TOMORROW';
+        msg.style.color = 'var(--green)';
+        document.getElementById('email-input').value = '';
+      } else {
+        msg.textContent = data.message || 'ERROR — TRY AGAIN';
+        msg.style.color = 'var(--red)';
+      }
+    } catch {
+      msg.textContent = '✓ NOTED — DELIVERY COMING SOON';
+      msg.style.color = 'var(--yellow)';
+    } finally {
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = '→ SUBSCRIBE';
+    }
+  });
+</script>
+</body>
+</html>`;
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}

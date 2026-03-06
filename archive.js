@@ -13,15 +13,29 @@ export function buildArchiveIndex() {
   const archiveDir = path.join(__dirname, 'public', 'archive');
   fs.mkdirSync(archiveDir, { recursive: true });
 
-  // Find all JSON files (each = one issue)
-  const jsonFiles = fs.readdirSync(archiveDir)
-    .filter(f => f.endsWith('.json'))
-    .sort()
-    .reverse(); // newest first
+  // Prefer issue-N.json files (individual per issue), fall back to date files
+  let jsonFiles = fs.readdirSync(archiveDir)
+    .filter(f => /^issue-\d+\.json$/.test(f))
+    .sort((a, b) => {
+      const na = parseInt(a.match(/\d+/)[0]);
+      const nb = parseInt(b.match(/\d+/)[0]);
+      return nb - na; // descending (newest first)
+    });
+
+  if (jsonFiles.length === 0) {
+    jsonFiles = fs.readdirSync(archiveDir)
+      .filter(f => /^\d{4}-\d{2}-\d{2}\.json$/.test(f))
+      .sort()
+      .reverse();
+  }
 
   const issues = jsonFiles.map(file => {
     try {
       const data = JSON.parse(fs.readFileSync(path.join(archiveDir, file), 'utf-8'));
+      // Determine best HTML link: issue-N.html if exists, else date.html
+      const issueHtml = `issue-${data.issue}.html`;
+      const dateHtml = `${data.date}.html`;
+      const htmlFile = fs.existsSync(path.join(archiveDir, issueHtml)) ? issueHtml : dateHtml;
       return {
         issue: data.issue,
         date: data.date,
@@ -30,6 +44,7 @@ export function buildArchiveIndex() {
         one_liner: data.briefing?.one_liner || '',
         story_count: data.briefing?.top_stories?.length || 0,
         generated_at: data.generated_at,
+        htmlFile,
       };
     } catch {
       return null;
@@ -40,7 +55,7 @@ export function buildArchiveIndex() {
     <tr>
       <td class="num">#${i.issue}</td>
       <td class="date">${i.date}</td>
-      <td><a href="${i.date}.html">${escapeHtml(i.headline)}</a></td>
+      <td><a href="${i.htmlFile || i.date + '.html'}">${escapeHtml(i.headline)}</a></td>
       <td><span class="badge">${escapeHtml(i.theme)}</span></td>
     </tr>
   `).join('');

@@ -1,9 +1,9 @@
 {
-  "issue": 6,
+  "issue": 8,
   "date": "2026-03-06",
-  "headline": "Wikipedia's vulnerability underscores critical security issues in digital platforms.",
-  "theme": "Security & AI",
-  "one_liner": "Today's tech highlights the urgent need for better security practices as vulnerabilities in well-known platforms disrupt user trust.",
+  "headline": "Wikipedia faces significant security breach, while AI powers new tools and programming languages evolve.",
+  "theme": "Security & AI Development",
+  "one_liner": "From security breaches at Wikipedia to the latest in AI advancements, today's tech world is a mix of challenges and innovation.",
   "story_count": 5,
   "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
 }

@@ -74,7 +74,10 @@ async function main() {
       producthunt_count: phPosts.length,
     }
   };
+  // Save by date (latest for this date) AND by issue number (never overwritten)
   fs.writeFileSync(path.join(archiveDir, `${today}.json`), JSON.stringify(jsonData, null, 2), 'utf-8');
+  fs.writeFileSync(path.join(archiveDir, `issue-${issueNumber}.json`), JSON.stringify(jsonData, null, 2), 'utf-8');
+  fs.writeFileSync(path.join(archiveDir, `issue-${issueNumber}.html`), html, 'utf-8');
 
   // Update issue count
   fs.writeFileSync(issuePath, String(issueNumber), 'utf-8');
@@ -112,6 +115,22 @@ async function main() {
     console.warn('[Signal] Archive index rebuild failed:', e.message);
   }
 
+  // Run source health check and build health dashboard
+  try {
+    const { checkSourceHealth, renderHealthPage } = await import('./health.js');
+    const healthResult = await checkSourceHealth();
+    let healthHistory = [];
+    const healthFile = path.join(__dirname, 'source_health.json');
+    if (fs.existsSync(healthFile)) {
+      try { healthHistory = JSON.parse(fs.readFileSync(healthFile, 'utf8')); } catch {}
+    }
+    const healthHtml = renderHealthPage(healthResult, healthHistory);
+    fs.writeFileSync(path.join(outputDir, 'health.html'), healthHtml);
+    console.log('[Signal] Source health dashboard rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Health check failed:', e.message);
+  }
+
   // Rebuild sitemap
   try {
     const { buildSitemap } = await import('./sitemap.js');
@@ -119,6 +138,15 @@ async function main() {
     console.log('[Signal] Sitemap rebuilt.');
   } catch (e) {
     console.warn('[Signal] Sitemap rebuild failed:', e.message);
+  }
+
+  // Rebuild landing page (index.html as proper pitch page)
+  try {
+    const { buildLandingPage } = await import('./landing.js');
+    buildLandingPage();
+    console.log('[Signal] Landing page rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Landing page rebuild failed:', e.message);
   }
 
   // Deploy to GitHub Pages
