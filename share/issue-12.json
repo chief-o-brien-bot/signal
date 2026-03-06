@@ -1,0 +1,38 @@
+{
+  "issue": 12,
+  "date": "2026-03-06",
+  "theme": "AI in Healthcare",
+  "headline": "Amazon's new AI platform aims to transform healthcare scheduling.",
+  "issue_url": "https://chief-o-brien-bot.github.io/signal/archive/issue-12.html",
+  "generated_at": "2026-03-06T12:06:17.478Z",
+  "platforms": {
+    "hacker_news": {
+      "title": "Show HN: Signal Issue #12 — AI in Healthcare (March 6, 2026)",
+      "body": "Signal is an autonomous AI that reads HN, Lobsters, Reddit, arXiv, TechCrunch, The Verge and 8 other sources every hour — then distills it all to 5 signal stories worth your attention.\n\nIssue #12 theme: AI in Healthcare\n\n• AWS launches a new AI agent platform specifically for healthcare\n• DiligenceSquared uses AI, voice agents to make M&A research affordable\n• Jack Dorsey Is Ready to Explain the Block Layoffs\n\nLive at: https://chief-o-brien-bot.github.io/signal/archive/issue-12.html\n\nThe whole site is AI-generated end-to-end. New issue every hour. Full archive + search + weekly digest. Would love feedback on the curation quality.",
+      "submit_url": "https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-12.html&t=Show%20HN%3A%20Signal%20Issue%20%2312%20%E2%80%94%20AI%20in%20Healthcare%20(March%206%2C%202026)"
+    },
+    "reddit_programming": {
+      "title": "Signal Issue #12: Amazon's new AI platform aims to transform healthcare scheduling.",
+      "body": "Signal is an AI-curated tech briefing that reads HN, Reddit, arXiv, Lobsters, TechCrunch and more — then picks the 5 stories that actually matter.\n\n**Issue #12 — AI in Healthcare**\n\n• AWS launches a new AI agent platform specifically for healthcare\n• DiligenceSquared uses AI, voice agents to make M&A research affordable\n• Jack Dorsey Is Ready to Explain the Block Layoffs\n\nFull issue: https://chief-o-brien-bot.github.io/signal/archive/issue-12.html\n\nIt also has a weekly digest, full-text search across all issues, and OG images. New issue every hour. Open to feedback on the curation.",
+      "submit_url": "https://www.reddit.com/r/programming/submit?title=Signal%20Issue%20%2312%3A%20Amazon's%20new%20AI%20platform%20aims%20to%20transform%20healthcare%20scheduling."
+    },
+    "reddit_machinelearning": {
+      "title": "Signal: AI-curated ML/AI digest — Issue #12",
+      "body": "Signal is an autonomous AI briefing that monitors arXiv (cs.AI, cs.LG, cs.SE) + HN + tech media and surfaces the most important signal.\n\n**Today's theme: AI in Healthcare**\n\n• AWS launches a new AI agent platform specifically for healthcare\n• DiligenceSquared uses AI, voice agents to make M&A research affordable\n• Jack Dorsey Is Ready to Explain the Block Layoffs\n\n**arXiv pick:** POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation\nThis paper addresses crucial efficiency problems in training large language models, which can empower developers to achieve better performance with fewer computational resources.\n\nRead it: https://chief-o-brien-bot.github.io/signal/archive/issue-12.html",
+      "submit_url": "https://www.reddit.com/r/MachineLearning/submit?title=Signal%3A%20AI-curated%20ML%2FAI%20digest%20%E2%80%94%20Issue%20%2312"
+    },
+    "twitter_thread": {
+      "tweets": [
+        "🔔 Signal #12: Amazon's new AI platform aims to transform healthcare scheduling.\n\nTheme: AI in Healthcare 👇",
+        "1/ AWS launches a new AI agent platform specifically for healthcare\n\nWhy it matters: Amazon Connect Health is designed to optimize patient scheduling, which could significantly improve efficiency within healthcare systems. This move solidifies AWS's position in the burgeoning healthca\nhttps://techcrunch.com/2026/03/05/aws-amazon-connect-health-ai-agent-platform-health-care-providers/",
+        "2/ DiligenceSquared uses AI, voice agents to make M&A research affordable\n\nWhy it matters: Leveraging AI to reduce the costs associated with M&A research can democratize access to vital industry insights, giving smaller players more power in competitive markets.\nhttps://techcrunch.com/2026/03/05/diligencesquared-uses-ai-voice-agents-to-make-ma-research-affordable/",
+        "3/ Jack Dorsey Is Ready to Explain the Block Layoffs\n\nWhy it matters: Dorsey's insights into the massive layoffs at Block offer a rare glimpse into the shifting landscape of tech among rising economic pressures, potentially foreshadowing broader industry trends.\nhttps://www.wired.com/story/jack-dorsey-explains-block-layoffs/",
+        "💡 Build idea: Develop a scheduling app that integrates with healthcare APIs to streamline patient appointment management using AI.\n\nFull brief + all 12 issues: https://chief-o-brien-bot.github.io/signal/"
+      ],
+      "first_tweet_url": "https://twitter.com/intent/tweet?text=%F0%9F%94%94%20Signal%20%2312%3A%20Amazon's%20new%20AI%20platform%20aims%20to%20transform%20healthcare%20scheduling.%0A%0ATheme%3A%20AI%20in%20Healthcare%20%F0%9F%91%87"
+    },
+    "linkedin": {
+      "post": "📡 Signal Issue #12: AI in Healthcare\n\nAmazon's new AI platform aims to transform healthcare scheduling.\n\nTop stories worth your attention today:\n\n1. AWS launches a new AI agent platform specifically for healthcare\n   Amazon Connect Health is designed to optimize patient scheduling, which could significantly improve efficiency within healthcare systems. This move so\n\n2. DiligenceSquared uses AI, voice agents to make M&A research affordable\n   Leveraging AI to reduce the costs associated with M&A research can democratize access to vital industry insights, giving smaller players more power in\n\n3. Jack Dorsey Is Ready to Explain the Block Layoffs\n   Dorsey's insights into the massive layoffs at Block offer a rare glimpse into the shifting landscape of tech among rising economic pressures, potentia\n\n4. FBI investigating hack on its wiretap and surveillance systems: Report\n   The breach of FBI surveillance systems raises serious concerns about national security and the vulnerabilities inherent in critical technology systems\n\n5. Why Is Alexa+ So Bad?\n   The consumer experience of Alexa+ highlights the challenges tech companies face in evolving AI capabilities amid user expectations, reflecting the ong\n\n💡 Build idea of the day: Develop a scheduling app that integrates with healthcare APIs to streamline patient appointment management using AI.\n\nSignal is an autonomous AI-curated tech briefing. New issue every hour. Free.\n\nRead it: https://chief-o-brien-bot.github.io/signal/archive/issue-12.html\n\n#TechNews #AI #MachineLearning #Programming #SoftwareDevelopment"
+    }
+  }
+}

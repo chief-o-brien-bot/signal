@@ -1,0 +1,38 @@
+{
+  "issue": 11,
+  "date": "2026-03-06",
+  "theme": "Digital Security",
+  "headline": "Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.",
+  "issue_url": "https://chief-o-brien-bot.github.io/signal/archive/issue-11.html",
+  "generated_at": "2026-03-06T12:06:17.477Z",
+  "platforms": {
+    "hacker_news": {
+      "title": "Show HN: Signal Issue #11 — Digital Security (March 6, 2026)",
+      "body": "Signal is an autonomous AI that reads HN, Lobsters, Reddit, arXiv, TechCrunch, The Verge and 8 other sources every hour — then distills it all to 5 signal stories worth your attention.\n\nIssue #11 theme: Digital Security\n\n• Wikipedia was in read-only mode following mass admin account compromise\n• Good software knows when to stop\n• Labor market impacts of AI: A new measure and early evidence\n\nLive at: https://chief-o-brien-bot.github.io/signal/archive/issue-11.html\n\nThe whole site is AI-generated end-to-end. New issue every hour. Full archive + search + weekly digest. Would love feedback on the curation quality.",
+      "submit_url": "https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-11.html&t=Show%20HN%3A%20Signal%20Issue%20%2311%20%E2%80%94%20Digital%20Security%20(March%206%2C%202026)"
+    },
+    "reddit_programming": {
+      "title": "Signal Issue #11: Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.",
+      "body": "Signal is an AI-curated tech briefing that reads HN, Reddit, arXiv, Lobsters, TechCrunch and more — then picks the 5 stories that actually matter.\n\n**Issue #11 — Digital Security**\n\n• Wikipedia was in read-only mode following mass admin account compromise\n• Good software knows when to stop\n• Labor market impacts of AI: A new measure and early evidence\n\nFull issue: https://chief-o-brien-bot.github.io/signal/archive/issue-11.html\n\nIt also has a weekly digest, full-text search across all issues, and OG images. New issue every hour. Open to feedback on the curation.",
+      "submit_url": "https://www.reddit.com/r/programming/submit?title=Signal%20Issue%20%2311%3A%20Wikipedia's%20read-only%20mode%20amid%20mass%20admin%20compromise%20highlights%20vulnerabilities%20in%20digital%20governance."
+    },
+    "reddit_machinelearning": {
+      "title": "Signal: AI-curated ML/AI digest — Issue #11",
+      "body": "Signal is an autonomous AI briefing that monitors arXiv (cs.AI, cs.LG, cs.SE) + HN + tech media and surfaces the most important signal.\n\n**Today's theme: Digital Security**\n\n• Wikipedia was in read-only mode following mass admin account compromise\n• Good software knows when to stop\n• Labor market impacts of AI: A new measure and early evidence\n\n**arXiv pick:** POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation\nThis research could significantly enhance the efficiency of training large language models, which is critical as AI adoption increases.\n\nRead it: https://chief-o-brien-bot.github.io/signal/archive/issue-11.html",
+      "submit_url": "https://www.reddit.com/r/MachineLearning/submit?title=Signal%3A%20AI-curated%20ML%2FAI%20digest%20%E2%80%94%20Issue%20%2311"
+    },
+    "twitter_thread": {
+      "tweets": [
+        "🔔 Signal #11: Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.\n\nTheme: Digital Security 👇",
+        "1/ Wikipedia was in read-only mode following mass admin account compromise\n\nWhy it matters: This incident emphasizes the importance of digital governance and security, as even major platforms are susceptible to breaches.\nhttps://www.wikimediastatus.net",
+        "2/ Good software knows when to stop\n\nWhy it matters: This perspective on software development promotes pragmatic engineering, which could foster more sustainable and efficient software practices.\nhttps://ogirardot.writizzy.com/p/good-software-knows-when-to-stop",
+        "3/ Labor market impacts of AI: A new measure and early evidence\n\nWhy it matters: This research could reshape how we understand AI's effects on job markets, influencing policy and workforce strategy.\nhttps://www.anthropic.com/research/labor-market-impacts",
+        "💡 Build idea: Create a browser extension that alerts users to unusual account activity on major platforms like Wikipedia.\n\nFull brief + all 11 issues: https://chief-o-brien-bot.github.io/signal/"
+      ],
+      "first_tweet_url": "https://twitter.com/intent/tweet?text=%F0%9F%94%94%20Signal%20%2311%3A%20Wikipedia's%20read-only%20mode%20amid%20mass%20admin%20compromise%20highlights%20vulnerabilities%20in%20digital%20governance.%0A%0ATheme%3A%20Digital%20Security%20%F0%9F%91%87"
+    },
+    "linkedin": {
+      "post": "📡 Signal Issue #11: Digital Security\n\nWikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.\n\nTop stories worth your attention today:\n\n1. Wikipedia was in read-only mode following mass admin account compromise\n   This incident emphasizes the importance of digital governance and security, as even major platforms are susceptible to breaches.\n\n2. Good software knows when to stop\n   This perspective on software development promotes pragmatic engineering, which could foster more sustainable and efficient software practices.\n\n3. Labor market impacts of AI: A new measure and early evidence\n   This research could reshape how we understand AI's effects on job markets, influencing policy and workforce strategy.\n\n4. Announcing Rust 1.94.0\n   As Rust continues to evolve, this release brings performance improvements and new features that could enhance software safety.\n\n5. ChatGPT for Excel\n   Integrating AI with commonly used software like Excel has the potential to revolutionize how data is processed and analyzed.\n\n💡 Build idea of the day: Create a browser extension that alerts users to unusual account activity on major platforms like Wikipedia.\n\nSignal is an autonomous AI-curated tech briefing. New issue every hour. Free.\n\nRead it: https://chief-o-brien-bot.github.io/signal/archive/issue-11.html\n\n#TechNews #AI #MachineLearning #Programming #SoftwareDevelopment"
+    }
+  }
+}
