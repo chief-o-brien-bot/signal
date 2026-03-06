@@ -1,5 +1,68 @@
 [
   {
+    "issue": 15,
+    "date": "2026-03-06",
+    "url": "archive/issue-15.html",
+    "theme": "Online Anonymity",
+    "headline": "Congress pushes to abolish online anonymity, igniting concerns over mass surveillance.",
+    "one_liner": "As Congress considers ending online anonymity, the implications for privacy and surveillance could reshape the digital landscape.",
+    "top_stories": [
+      {
+        "title": "Congress Is Considering Abolishing Your Right to Be Anonymous Online",
+        "why": "The bipartisan push to remove anonymity threatens freedom of speech and could lead to unprecedented levels of surveillance, impacting countless internet users.",
+        "source": "reddit",
+        "url": "https://theintercept.com/2026/03/05/kosa-online-age-verification-free-speech-privacy/",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/12345",
+        "signal_strength": "high"
+      },
+      {
+        "title": "10% of Firefox crashes are caused by bitflips",
+        "why": "Understanding hardware-induced errors like bitflips is critical for improving software stability and performance, particularly for developers relying on robust tools.",
+        "source": "lobsters",
+        "url": "https://mas.to/@gabrielesvelto/116171750653898304",
+        "discussion_url": "https://lobste.rs/s/o3c2q8/10_firefox_crashes_are_caused_by_bitflips",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "A GitHub Issue Title Compromised 4,000 Developer Machines",
+        "why": "This incident highlights the vulnerabilities in software development environments, making it essential for developers to adopt stricter security practices.",
+        "source": "hn",
+        "url": "https://grith.ai/blog/clinejection-when-your-ai-tool-installs-another",
+        "discussion_url": "https://news.ycombinator.com/item?id=12345",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+        "why": "This tool symbolizes a shift towards making advanced robotics more accessible through mobile technology, potentially revolutionizing the development of robotic policies.",
+        "source": "arxiv",
+        "url": "https://arxiv.org/abs/2603.05504v1",
+        "discussion_url": "https://www.reddit.com/r/MachineLearning/comments/12345",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Just Use Postgres",
+        "why": "This article provides a comprehensive argument for choosing Postgres over alternatives, emphasizing the importance of reliability and feature-rich databases in modern development.",
+        "source": "hn",
+        "url": "http://amattn.com/p/just_use_postgres.html",
+        "discussion_url": "https://news.ycombinator.com/item?id=12345",
+        "signal_strength": "low"
+      }
+    ],
+    "github": {
+      "name": "awesome",
+      "why": "This extensive collection of curated lists across various topics is invaluable for developers seeking quality resources and tools.",
+      "url": "https://github.com/sindresorhus/awesome"
+    },
+    "arxiv": {
+      "title": "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+      "why": "This research advances the accessibility of robotics technology, enabling easier adaptation and application in real-world settings.",
+      "url": "https://arxiv.org/abs/2603.05504v1",
+      "category": "cs.AI"
+    },
+    "build_idea": "Develop a browser extension that alerts users about proposed legislation impacting online privacy and anonymity.",
+    "_text": "online anonymity congress pushes to abolish online anonymity, igniting concerns over mass surveillance. as congress considers ending online anonymity, the implications for privacy and surveillance could reshape the digital landscape. develop a browser extension that alerts users about proposed legislation impacting online privacy and anonymity. congress is considering abolishing your right to be anonymous online the bipartisan push to remove anonymity threatens freedom of speech and could lead to unprecedented levels of surveillance, impacting countless internet users. 10% of firefox crashes are caused by bitflips understanding hardware-induced errors like bitflips is critical for improving software stability and performance, particularly for developers relying on robust tools. a github issue title compromised 4,000 developer machines this incident highlights the vulnerabilities in software development environments, making it essential for developers to adopt stricter security practices. robopocket: improve robot policies instantly with your phone this tool symbolizes a shift towards making advanced robotics more accessible through mobile technology, potentially revolutionizing the development of robotic policies. just use postgres this article provides a comprehensive argument for choosing postgres over alternatives, emphasizing the importance of reliability and feature-rich databases in modern development. awesome this extensive collection of curated lists across various topics is invaluable for developers seeking quality resources and tools. robopocket: improve robot policies instantly with your phone this research advances the accessibility of robotics technology, enabling easier adaptation and application in real-world settings."
+  },
+  {
     "issue": 14,
     "date": "2026-03-06",
     "url": "archive/issue-14.html",
