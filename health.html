@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal — Source Health</title>
+  <meta http-equiv="refresh" content="300">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0f;
+      color: #e2e2f0;
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    a { color: #6c63ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      border-bottom: 1px solid #1e1e2e;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo { font-size: 11px; letter-spacing: 4px; color: #666680; margin-bottom: 8px; }
+    .logo span { color: #00ff88; }
+    h1 { font-size: 20px; margin-bottom: 8px; }
+    .overall {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: bold;
+      color: #ffcc00;
+      border: 1px solid #ffcc0044;
+      background: #ffcc0011;
+    }
+    .subtitle { color: #666680; font-size: 11px; margin-top: 8px; }
+    .main { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: #666680;
+      text-transform: uppercase;
+      border-left: 2px solid #6c63ff;
+      padding-left: 8px;
+      margin-bottom: 20px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    thead tr { border-bottom: 1px solid #1e1e2e; }
+    th { font-size: 10px; letter-spacing: 2px; color: #666680; text-align: left; padding: 8px 12px; }
+    td { padding: 14px 12px; border-bottom: 1px solid #12121a; vertical-align: middle; }
+    tr:hover td { background: #12121a; }
+    td.source-name { font-weight: bold; }
+    td.status.healthy { color: #00ff88; }
+    td.status.empty { color: #ffcc00; }
+    td.status.error { color: #ff4444; }
+    td.count { color: #6c63ff; }
+    td.latency { color: #888; font-size: 12px; }
+    td.sparkline { font-size: 16px; color: #444460; letter-spacing: 2px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .stat {
+      background: #12121a;
+      border: 1px solid #1e1e2e;
+      border-radius: 4px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat .val { font-size: 28px; color: #6c63ff; font-weight: bold; }
+    .stat .lbl { font-size: 10px; letter-spacing: 2px; color: #666680; margin-top: 4px; }
+    .nav { margin-bottom: 32px; }
+    .nav a { color: #666680; font-size: 12px; }
+    footer {
+      border-top: 1px solid #1e1e2e;
+      padding: 20px;
+      text-align: center;
+      color: #333355;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>◈</span> SIGNAL</div>
+    <h1>Source Health Dashboard</h1>
+    <div class="overall">DEGRADED</div>
+    <div class="subtitle">Last checked: Fri, 06 Mar 2026 07:04:57 GMT · Auto-refreshes every 5 min</div>
+  </header>
+  <main class="main">
+    <div class="nav"><a href="/">← Today's brief</a> · <a href="/archive/">Archive</a></div>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="val">6/7</div>
+        <div class="lbl">Sources Healthy</div>
+      </div>
+      <div class="stat">
+        <div class="val">90</div>
+        <div class="lbl">Items Fetched</div>
+      </div>
+      <div class="stat">
+        <div class="val">510ms</div>
+        <div class="lbl">Total Check Time</div>
+      </div>
+    </div>
+
+    <div class="section-label">Data Sources</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Status</th>
+          <th>Items</th>
+          <th>Latency</th>
+          <th>History (10 runs)</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="source-name">🟡 ProductHunt</td>
+        <td class="status empty">EMPTY</td>
+        <td class="count">0</td>
+        <td class="latency">85ms</td>
+        <td class="sparkline">○</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 Dev.to</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">15</td>
+        <td class="latency">188ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 Hacker News</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">20</td>
+        <td class="latency">326ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 arXiv</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">10</td>
+        <td class="latency">307ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 Show HN</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">10</td>
+        <td class="latency">325ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 Lobste.rs</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">25</td>
+        <td class="latency">336ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    
+      <tr>
+        <td class="source-name">🟢 GitHub Trending</td>
+        <td class="status healthy">HEALTHY</td>
+        <td class="count">10</td>
+        <td class="latency">442ms</td>
+        <td class="sparkline">▪</td>
+      </tr>
+    </tbody>
+    </table>
+
+    <div class="section-label">Legend</div>
+    <p style="color:#666680;font-size:12px;">▪ Healthy &nbsp;·&nbsp; ○ Empty (0 items) &nbsp;·&nbsp; ✗ Error &nbsp;·&nbsp; · No data</p>
+  </main>
+  <footer>SIGNAL — Autonomous AI tech curation · Source health auto-checked every hour</footer>
+</body>
+</html>
