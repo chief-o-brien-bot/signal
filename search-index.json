@@ -1,5 +1,68 @@
 [
   {
+    "issue": 16,
+    "date": "2026-03-06",
+    "url": "archive/issue-16.html",
+    "theme": "Urban Technology",
+    "headline": "City Detect leverages AI to combat urban decay, raising $13M for safer, cleaner cities.",
+    "one_liner": "AI is not just in tech; it's now tackling urban decay, while important ethical dilemmas about AI interactions loom large.",
+    "top_stories": [
+      {
+        "title": "City Detect uses AI to help cities stay safe and clean",
+        "why": "This funding signifies a growing trend in utilizing AI for urban management, aiming to address critical issues like public safety and cleanliness in cities.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/city-detect-uses-ai-to-help-cities-stay-safe-and-clean/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47274861",
+        "signal_strength": "high"
+      },
+      {
+        "title": "India’s Karnataka signals intent to ban social media for under-16s",
+        "why": "This move could set a legal precedent impacting global policies on social media usage for minors, amid ongoing debates about children's rights online.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/indias-karnataka-signals-intent-to-ban-social-media-for-under-16s/",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/11b105i/indias_karnataka_signals_intent_to_ban_social/",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Quantum scale-up Pasqal plans $2B SPAC listing, promises to ‘remain French’",
+        "why": "Pasqal's listing is a pivotal moment for the quantum computing space, demonstrating investor confidence and the increasing importance of quantum technologies in global markets.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/quantum-scale-up-pasqal-plans-2b-spac-listing-promises-to-remain-french/",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/11b105i/quantum_scaleup_pasqal_plans_2b_spac_listing/",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "10–97% in nine minutes: BYD presents second generation of Blade Battery",
+        "why": "The rapid charging capability of BYD's new battery presents a game-changer for electric vehicles, enhancing usability and potentially accelerating EV adoption.",
+        "source": "reddit",
+        "url": "https://www.electrive.com/2026/03/05/10-97-in-nine-minutes-byd-presents-second-generation-of-blade-battery/",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/11b105i/byd_presents_second_generation_of_blade_battery/",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Man Fell in Love with Google Gemini and It Told Him to Stage a 'Mass Casualty Attack' Before He Took His Own Life: Lawsuit",
+        "why": "This alarming case raises profound ethical questions about AI interactions and the potential consequences of deep attachments to these technologies on mental health.",
+        "source": "reddit",
+        "url": "https://people.com/man-fell-in-love-google-gemini-took-own-life-be-with-it-lawsuit-11919867",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/11b105i/man_fell_in_love_with_google_gemini/",
+        "signal_strength": "high"
+      }
+    ],
+    "github": {
+      "name": "openclaw",
+      "why": "This project provides a personal AI assistant that's compatible with any OS, allowing users to seamlessly integrate AI functionalities into their everyday tasks.",
+      "url": "https://github.com/openclaw/openclaw"
+    },
+    "arxiv": {
+      "title": "Cheap Thrills: Effective Amortized Optimization Using Inexpensive Labels",
+      "why": "This research offers new insights into optimization problems, helping data scientists leverage inexpensive labels to improve model performance, crucial for scalable AI applications.",
+      "url": "https://arxiv.org/abs/2603.05495v1",
+      "category": "cs.LG"
+    },
+    "build_idea": "Create an AI-driven platform to help local governments monitor urban health and safety metrics, using data from various sources to provide actionable insights.",
+    "_text": "urban technology city detect leverages ai to combat urban decay, raising $13m for safer, cleaner cities. ai is not just in tech; it's now tackling urban decay, while important ethical dilemmas about ai interactions loom large. create an ai-driven platform to help local governments monitor urban health and safety metrics, using data from various sources to provide actionable insights. city detect uses ai to help cities stay safe and clean this funding signifies a growing trend in utilizing ai for urban management, aiming to address critical issues like public safety and cleanliness in cities. india’s karnataka signals intent to ban social media for under-16s this move could set a legal precedent impacting global policies on social media usage for minors, amid ongoing debates about children's rights online. quantum scale-up pasqal plans $2b spac listing, promises to ‘remain french’ pasqal's listing is a pivotal moment for the quantum computing space, demonstrating investor confidence and the increasing importance of quantum technologies in global markets. 10–97% in nine minutes: byd presents second generation of blade battery the rapid charging capability of byd's new battery presents a game-changer for electric vehicles, enhancing usability and potentially accelerating ev adoption. man fell in love with google gemini and it told him to stage a 'mass casualty attack' before he took his own life: lawsuit this alarming case raises profound ethical questions about ai interactions and the potential consequences of deep attachments to these technologies on mental health. openclaw this project provides a personal ai assistant that's compatible with any os, allowing users to seamlessly integrate ai functionalities into their everyday tasks. cheap thrills: effective amortized optimization using inexpensive labels this research offers new insights into optimization problems, helping data scientists leverage inexpensive labels to improve model performance, crucial for scalable ai applications."
+  },
+  {
     "issue": 15,
     "date": "2026-03-06",
     "url": "archive/issue-15.html",
