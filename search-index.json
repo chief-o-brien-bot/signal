@@ -1,5 +1,68 @@
 [
   {
+    "issue": 14,
+    "date": "2026-03-06",
+    "url": "archive/issue-14.html",
+    "theme": "AI Integration",
+    "headline": "New tools and debates emerging in the tech landscape as AI influences multiple sectors.",
+    "one_liner": "AI's influence grows as transparency issues and new tools emerge, signaling a shift in tech dynamics towards efficiency and trust.",
+    "top_stories": [
+      {
+        "title": "Cluely CEO Roy Lee admits to publicly lying about revenue numbers last year",
+        "why": "This admission reveals significant transparency issues within tech startups, particularly in the AI space, undermining investor trust and affecting market dynamics.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/05/cluely-ceo-roy-lee-admits-to-publicly-lying-about-revenue-numbers-last-year/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47274755",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Anthropic to challenge DOD’s supply-chain label in court",
+        "why": "This legal challenge could redefine compliance requirements for AI companies, impacting how they approach government contracts and security protocols.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/05/anthropic-to-challenge-dods-supply-chain-label-in-court/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47274199",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Just Use Postgres",
+        "why": "A compelling discussion on the reliability and efficiency of PostgreSQL highlights the need for developers to adopt robust database solutions in their projects.",
+        "source": "reddit",
+        "url": "http://amattn.com/p/just_use_postgres.html",
+        "discussion_url": "https://www.reddit.com/r/programming/comments/xyz123/just_use_postgres/",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "AI Ate the Homework: What Communities Are Actually For Now",
+        "why": "This article explores how AI is reshaping online communities, indicating a shift in interactions and engagements as technology becomes more embedded in daily life.",
+        "source": "devto",
+        "url": "https://dev.to/bekahhw/ai-ate-the-homework-what-communities-are-actually-for-now-11hi",
+        "discussion_url": "https://dev.to/bekahhw/ai-ate-the-homework-what-communities-are-actually-for-now-11hi",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+        "why": "This new approach to robot training via smartphone interfaces could revolutionize how robotics integrates with everyday tasks, enhancing accessibility.",
+        "source": "arxiv",
+        "url": "https://arxiv.org/abs/2603.05504v1",
+        "discussion_url": "https://news.ycombinator.com/item?id=47274018",
+        "signal_strength": "high"
+      }
+    ],
+    "github": {
+      "name": "awesome",
+      "why": "This repository is a curated collection of resources that can aid developers in finding quality information across various tech topics, boosting learning and productivity.",
+      "url": "https://github.com/sindresorhus/awesome"
+    },
+    "arxiv": {
+      "title": "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+      "why": "Scaling imitation learning through mobile interfaces can significantly speed up the development of effective robotic policies, making it relevant for practitioners in robotics and AI.",
+      "url": "https://arxiv.org/abs/2603.05504v1",
+      "category": "cs.AI"
+    },
+    "build_idea": "Develop a mobile app that uses AI to help users train and configure their robotics systems more intuitively.",
+    "_text": "ai integration new tools and debates emerging in the tech landscape as ai influences multiple sectors. ai's influence grows as transparency issues and new tools emerge, signaling a shift in tech dynamics towards efficiency and trust. develop a mobile app that uses ai to help users train and configure their robotics systems more intuitively. cluely ceo roy lee admits to publicly lying about revenue numbers last year this admission reveals significant transparency issues within tech startups, particularly in the ai space, undermining investor trust and affecting market dynamics. anthropic to challenge dod’s supply-chain label in court this legal challenge could redefine compliance requirements for ai companies, impacting how they approach government contracts and security protocols. just use postgres a compelling discussion on the reliability and efficiency of postgresql highlights the need for developers to adopt robust database solutions in their projects. ai ate the homework: what communities are actually for now this article explores how ai is reshaping online communities, indicating a shift in interactions and engagements as technology becomes more embedded in daily life. robopocket: improve robot policies instantly with your phone this new approach to robot training via smartphone interfaces could revolutionize how robotics integrates with everyday tasks, enhancing accessibility. awesome this repository is a curated collection of resources that can aid developers in finding quality information across various tech topics, boosting learning and productivity. robopocket: improve robot policies instantly with your phone scaling imitation learning through mobile interfaces can significantly speed up the development of effective robotic policies, making it relevant for practitioners in robotics and ai."
+  },
+  {
     "issue": 13,
     "date": "2026-03-06",
     "url": "archive/issue-13.html",
