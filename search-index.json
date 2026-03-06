@@ -1,5 +1,68 @@
 [
   {
+    "issue": 11,
+    "date": "2026-03-06",
+    "url": "archive/issue-11.html",
+    "theme": "Digital Security",
+    "headline": "Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.",
+    "one_liner": "Today's tech landscape reveals vulnerabilities in trusted platforms, highlights the efficiency of Rust and AI in productivity tools, and reshapes our labor markets.",
+    "top_stories": [
+      {
+        "title": "Wikipedia was in read-only mode following mass admin account compromise",
+        "why": "This incident emphasizes the importance of digital governance and security, as even major platforms are susceptible to breaches.",
+        "source": "hn",
+        "url": "https://www.wikimediastatus.net",
+        "discussion_url": "https://news.ycombinator.com/item?id=47279832",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Good software knows when to stop",
+        "why": "This perspective on software development promotes pragmatic engineering, which could foster more sustainable and efficient software practices.",
+        "source": "hn",
+        "url": "https://ogirardot.writizzy.com/p/good-software-knows-when-to-stop",
+        "discussion_url": "https://news.ycombinator.com/item?id=47279795",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Labor market impacts of AI: A new measure and early evidence",
+        "why": "This research could reshape how we understand AI's effects on job markets, influencing policy and workforce strategy.",
+        "source": "hn",
+        "url": "https://www.anthropic.com/research/labor-market-impacts",
+        "discussion_url": "https://news.ycombinator.com/item?id=47279402",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Announcing Rust 1.94.0",
+        "why": "As Rust continues to evolve, this release brings performance improvements and new features that could enhance software safety.",
+        "source": "lobsters",
+        "url": "https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/",
+        "discussion_url": "https://lobste.rs/s/7ghusp/announcing_rust_1_94_0",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "ChatGPT for Excel",
+        "why": "Integrating AI with commonly used software like Excel has the potential to revolutionize how data is processed and analyzed.",
+        "source": "producthunt",
+        "url": "https://www.producthunt.com/products/chatgpt-for-excel-3",
+        "discussion_url": "https://www.producthunt.com/posts/chatgpt-for-excel-3",
+        "signal_strength": "medium"
+      }
+    ],
+    "github": {
+      "name": "freeCodeCamp/freeCodeCamp",
+      "why": "With a massive user base, freeCodeCamp continues to be an essential resource for learning programming skills.",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp"
+    },
+    "arxiv": {
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "why": "This research could significantly enhance the efficiency of training large language models, which is critical as AI adoption increases.",
+      "url": "https://arxiv.org/abs/2603.05500v1",
+      "category": "cs.AI"
+    },
+    "build_idea": "Create a browser extension that alerts users to unusual account activity on major platforms like Wikipedia.",
+    "_text": "digital security wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance. today's tech landscape reveals vulnerabilities in trusted platforms, highlights the efficiency of rust and ai in productivity tools, and reshapes our labor markets. create a browser extension that alerts users to unusual account activity on major platforms like wikipedia. wikipedia was in read-only mode following mass admin account compromise this incident emphasizes the importance of digital governance and security, as even major platforms are susceptible to breaches. good software knows when to stop this perspective on software development promotes pragmatic engineering, which could foster more sustainable and efficient software practices. labor market impacts of ai: a new measure and early evidence this research could reshape how we understand ai's effects on job markets, influencing policy and workforce strategy. announcing rust 1.94.0 as rust continues to evolve, this release brings performance improvements and new features that could enhance software safety. chatgpt for excel integrating ai with commonly used software like excel has the potential to revolutionize how data is processed and analyzed. freecodecamp/freecodecamp with a massive user base, freecodecamp continues to be an essential resource for learning programming skills. poet-x: memory-efficient llm training by scaling orthogonal transformation this research could significantly enhance the efficiency of training large language models, which is critical as ai adoption increases."
+  },
+  {
     "issue": 10,
     "date": "2026-03-06",
     "url": "archive/issue-10.html",
