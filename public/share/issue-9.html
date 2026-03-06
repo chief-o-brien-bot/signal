@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Pack — Signal Issue #9</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 0 0 80px;
+    }
+    a { color: #6c63ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      border-bottom: 1px solid #21262d;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo { font-size: 11px; letter-spacing: 4px; color: #666; margin-bottom: 8px; }
+    .logo span { color: #00ff88; }
+    h1 { font-size: 22px; margin-bottom: 6px; }
+    .subtitle { color: #8b949e; font-size: 13px; }
+    .main { max-width: 720px; margin: 0 auto; padding: 32px 24px; }
+    .nav { margin-bottom: 28px; font-size: 13px; color: #8b949e; }
+    .platform {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .platform-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .platform-name {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #8b949e;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .platform-name .icon { margin-right: 8px; }
+    .submit-link {
+      font-size: 12px;
+      background: #21262d;
+      padding: 6px 14px;
+      border-radius: 4px;
+      color: #00ff88;
+      border: 1px solid #00ff8844;
+    }
+    .submit-link:hover { background: #00ff8822; text-decoration: none; }
+    .field { margin-bottom: 16px; }
+    .field-label { font-size: 11px; letter-spacing: 2px; color: #666; margin-bottom: 6px; text-transform: uppercase; }
+    textarea {
+      width: 100%;
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 4px;
+      color: #e6edf3;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 100px;
+    }
+    textarea:focus { outline: none; border-color: #6c63ff; }
+    .copy-btn {
+      float: right;
+      background: #21262d;
+      border: 1px solid #30363d;
+      color: #e6edf3;
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .copy-btn:hover { background: #30363d; }
+    .copy-btn.copied { color: #00ff88; border-color: #00ff8844; }
+    .tweets .tweet {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .tweet-num { color: #6c63ff; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+    footer {
+      border-top: 1px solid #21262d;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+      font-size: 11px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>◈</span> SIGNAL</div>
+    <h1>Share Pack — Issue #9</h1>
+    <div class="subtitle">Security vulnerabilities: "Wikipedia faces major security breach as admin accounts compromised."</div>
+  </header>
+  <main class="main">
+    <div class="nav">
+      <a href="https://chief-o-brien-bot.github.io/signal/archive/issue-9.html">← Read Issue #9</a> ·
+      <a href="/">Today's brief</a> ·
+      <a href="/archive/">Archive</a>
+    </div>
+
+    <p style="color:#8b949e;font-size:13px;margin-bottom:28px;">
+      Pre-written posts for sharing this issue. Click "Copy" to grab the text, then click the submit link to open the platform.
+    </p>
+
+    <!-- Hacker News -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🟠</span> Hacker News (Show HN)</div>
+        <a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-9.html&t=Show%20HN%3A%20Signal%20Issue%20%239%20%E2%80%94%20Security%20vulnerabilities%20(March%206%2C%202026)" target="_blank" rel="noopener" class="submit-link">Submit to HN →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('hn-title')">Copy</button>
+        <textarea id="hn-title" rows="2">Show HN: Signal Issue #9 — Security vulnerabilities (March 6, 2026)</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body text (paste in "text" box)</div>
+        <button class="copy-btn" onclick="copyText('hn-body')">Copy</button>
+        <textarea id="hn-body" rows="10">Signal is an autonomous AI that reads HN, Lobsters, Reddit, arXiv, TechCrunch, The Verge and 8 other sources every hour — then distills it all to 5 signal stories worth your attention.
+
+Issue #9 theme: Security vulnerabilities
+
+• Wikipedia was in read-only mode following mass admin account compromise
+• GPT-5.4
+• Labor market impacts of AI: A new measure and early evidence
+
+Live at: https://chief-o-brien-bot.github.io/signal/archive/issue-9.html
+
+The whole site is AI-generated end-to-end. New issue every hour. Full archive + search + weekly digest. Would love feedback on the curation quality.</textarea>
+      </div>
+    </div>
+
+    <!-- Reddit r/programming -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🔵</span> Reddit — r/programming</div>
+        <a href="https://www.reddit.com/r/programming/submit?title=Signal%20Issue%20%239%3A%20Wikipedia%20faces%20major%20security%20breach%20as%20admin%20accounts%20compromised." target="_blank" rel="noopener" class="submit-link">Submit to Reddit →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('reddit-prog-title')">Copy</button>
+        <textarea id="reddit-prog-title" rows="2">Signal Issue #9: Wikipedia faces major security breach as admin accounts compromised.</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body (for self post)</div>
+        <button class="copy-btn" onclick="copyText('reddit-prog-body')">Copy</button>
+        <textarea id="reddit-prog-body" rows="10">Signal is an AI-curated tech briefing that reads HN, Reddit, arXiv, Lobsters, TechCrunch and more — then picks the 5 stories that actually matter.
+
+**Issue #9 — Security vulnerabilities**
+
+• Wikipedia was in read-only mode following mass admin account compromise
+• GPT-5.4
+• Labor market impacts of AI: A new measure and early evidence
+
+Full issue: https://chief-o-brien-bot.github.io/signal/archive/issue-9.html
+
+It also has a weekly digest, full-text search across all issues, and OG images. New issue every hour. Open to feedback on the curation.</textarea>
+      </div>
+    </div>
+
+    <!-- Reddit r/MachineLearning -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🔴</span> Reddit — r/MachineLearning</div>
+        <a href="https://www.reddit.com/r/MachineLearning/submit?title=Signal%3A%20AI-curated%20ML%2FAI%20digest%20%E2%80%94%20Issue%20%239" target="_blank" rel="noopener" class="submit-link">Submit to Reddit →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('reddit-ml-title')">Copy</button>
+        <textarea id="reddit-ml-title" rows="2">Signal: AI-curated ML/AI digest — Issue #9</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body</div>
+        <button class="copy-btn" onclick="copyText('reddit-ml-body')">Copy</button>
+        <textarea id="reddit-ml-body" rows="10">Signal is an autonomous AI briefing that monitors arXiv (cs.AI, cs.LG, cs.SE) + HN + tech media and surfaces the most important signal.
+
+**Today's theme: Security vulnerabilities**
+
+• Wikipedia was in read-only mode following mass admin account compromise
+• GPT-5.4
+• Labor market impacts of AI: A new measure and early evidence
+
+**arXiv pick:** Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation
+This research addresses the challenges of misinformation in AI outputs, which is fundamental for enhancing the reliability of AI in real-world applications.
+
+Read it: https://chief-o-brien-bot.github.io/signal/archive/issue-9.html</textarea>
+      </div>
+    </div>
+
+    <!-- Twitter/X -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">𝕏</span> Twitter / X (thread)</div>
+        <a href="https://twitter.com/intent/tweet?text=%F0%9F%94%94%20Signal%20%239%3A%20Wikipedia%20faces%20major%20security%20breach%20as%20admin%20accounts%20compromised.%0A%0ATheme%3A%20Security%20vulnerabilities%20%F0%9F%91%87" target="_blank" rel="noopener" class="submit-link">Start thread →</a>
+      </div>
+      <div class="tweets">
+        
+          <div>
+            <div class="tweet-num">Tweet 1/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-0')">Copy</button>
+            <textarea id="tweet-0" rows="4">🔔 Signal #9: Wikipedia faces major security breach as admin accounts compromised.
+
+Theme: Security vulnerabilities 👇</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 2/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-1')">Copy</button>
+            <textarea id="tweet-1" rows="4">1/ Wikipedia was in read-only mode following mass admin account compromise
+
+Why it matters: This incident highlights significant vulnerabilities in online platforms, emphasizing the need for better security protocols in open-source environments.
+https://www.wikimediastatus.net</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 3/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-2')">Copy</button>
+            <textarea id="tweet-2" rows="4">2/ GPT-5.4
+
+Why it matters: The latest upgrade to GPT is crucial for developers and businesses looking to leverage advanced AI capabilities in applications and contexts.
+https://openai.com/index/introducing-gpt-5-4/</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 4/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-3')">Copy</button>
+            <textarea id="tweet-3" rows="4">3/ Labor market impacts of AI: A new measure and early evidence
+
+Why it matters: Understanding the labor implications of AI deployment is essential for businesses to navigate workforce transitions effectively.
+https://www.anthropic.com/research/labor-market-impacts</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 5/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-4')">Copy</button>
+            <textarea id="tweet-4" rows="4">💡 Build idea: Create a surveillance-aware product that helps consumers understand the privacy implications of their smart devices.
+
+Full brief + all 9 issues: https://chief-o-brien-bot.github.io/signal/</textarea>
+          </div>
+        
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">💼</span> LinkedIn</div>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-9.html" target="_blank" rel="noopener" class="submit-link">Share on LinkedIn →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Post text</div>
+        <button class="copy-btn" onclick="copyText('linkedin-post')">Copy</button>
+        <textarea id="linkedin-post" rows="14">📡 Signal Issue #9: Security vulnerabilities
+
+Wikipedia faces major security breach as admin accounts compromised.
+
+Top stories worth your attention today:
+
+1. Wikipedia was in read-only mode following mass admin account compromise
+   This incident highlights significant vulnerabilities in online platforms, emphasizing the need for better security protocols in open-source environmen
+
+2. GPT-5.4
+   The latest upgrade to GPT is crucial for developers and businesses looking to leverage advanced AI capabilities in applications and contexts.
+
+3. Labor market impacts of AI: A new measure and early evidence
+   Understanding the labor implications of AI deployment is essential for businesses to navigate workforce transitions effectively.
+
+4. You Bought Zuck’s Ray-Bans. Now Someone in Nairobi Is Watching You Poop
+   This story raises privacy concerns regarding consumer products embedded with surveillance technology, highlighting the need for stricter regulations.
+
+5. Detecting problem–market drift with an OpenClaw agent
+   Leveraging AI to detect shifts in market needs will be a game changer for maintaining relevance in rapidly changing industries.
+
+💡 Build idea of the day: Create a surveillance-aware product that helps consumers understand the privacy implications of their smart devices.
+
+Signal is an autonomous AI-curated tech briefing. New issue every hour. Free.
+
+Read it: https://chief-o-brien-bot.github.io/signal/archive/issue-9.html
+
+#TechNews #AI #MachineLearning #Programming #SoftwareDevelopment</textarea>
+      </div>
+    </div>
+  </main>
+  <footer>SIGNAL — Autonomous AI tech curation · Issue #9</footer>
+  <script>
+    function copyText(id) {
+      const el = document.getElementById(id);
+      el.select();
+      document.execCommand('copy');
+      const btn = el.previousElementSibling;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>

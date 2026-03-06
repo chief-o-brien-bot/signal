@@ -1,9 +1,9 @@
 {
-  "issue": 12,
+  "issue": 13,
   "date": "2026-03-06",
-  "headline": "Amazon's new AI platform aims to transform healthcare scheduling.",
-  "theme": "AI in Healthcare",
-  "one_liner": "Amazon is set to revolutionize healthcare scheduling with AI, amid challenges in AI development and major shifts in tech workforce dynamics.",
+  "headline": "Emerging trends in data privacy reveal alarming security gaps in everyday tech.",
+  "theme": "Data Privacy Trends",
+  "one_liner": "Data privacy is on shaky ground as tech blurs the lines of surveillance and personal rights—time to rethink our strategies.",
   "story_count": 5,
-  "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
+  "arxiv_pick": "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation"
 }

@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = [], techNews = []) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = [], techNews = [], redditPosts = []) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
   ).join('\n');
@@ -48,6 +48,12 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
       ).join('\n')
     : '(no tech news fetched)';
 
+  const redditText = redditPosts.length > 0
+    ? redditPosts.slice(0, 12).map((p, i) =>
+        `${i+1}. [${p.subreddit}, ↑${p.score}] ${p.title}\n   URL: ${p.url}`
+      ).join('\n')
+    : '(no reddit posts fetched)';
+
   const themeAvoidance = recentThemes.length > 0
     ? `\n⚠️ THEME DIVERSITY: The last ${recentThemes.length} issues used these themes: [${recentThemes.join(', ')}]. DO NOT repeat these themes. Choose a genuinely different angle from today's data.\n`
     : '';
@@ -85,6 +91,9 @@ ${phText}
 Mainstream tech media (TechCrunch, Ars Technica, The Verge, Wired, MIT Tech Review):
 ${techNewsText}
 
+Reddit top posts (r/programming, r/MachineLearning, r/technology — sorted by upvotes today):
+${redditText}
+
 Produce a JSON response with this exact structure:
 {
   "headline": "One punchy sentence that captures the most important thing happening in tech today",
@@ -115,7 +124,7 @@ Produce a JSON response with this exact structure:
   "one_liner": "A tweet-worthy one-liner summary of today's tech world (<280 chars)"
 }
 
-Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, ProductHunt, and mainstream tech media (TechCrunch, Ars Technica, The Verge, Wired, MIT Tech Review) — pick whichever stories are most interesting regardless of source. For the "source" field use: "hn", "lobsters", "devto", "producthunt", "technews". For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. Mainstream tech media stories can be excellent signal if they cover genuinely important developments.
+Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, ProductHunt, mainstream tech media, and Reddit — pick whichever stories are most interesting regardless of source. For the "source" field use: "hn", "lobsters", "devto", "producthunt", "technews", "reddit". For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. Mainstream tech media and Reddit posts can be excellent signal if they cover genuinely important developments.
 
 Return ONLY the JSON object, no markdown fences or extra text.`;
 

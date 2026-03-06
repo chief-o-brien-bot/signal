@@ -77,6 +77,20 @@ export async function checkSourceHealth() {
       });
       const text = await r.text();
       return (text.match(/<entry>/g) || []).length;
+    },
+    'Reddit (r/programming)': async () => {
+      const r = await fetch('https://www.reddit.com/r/programming/top.rss?t=day&limit=10', {
+        headers: { 'User-Agent': 'Signal-Agent/1.0; +https://chief-o-brien-bot.github.io/signal/' }
+      });
+      const text = await r.text();
+      return (text.match(/<entry>/g) || []).length;
+    },
+    'Reddit (r/MachineLearning)': async () => {
+      const r = await fetch('https://www.reddit.com/r/MachineLearning/top.rss?t=day&limit=10', {
+        headers: { 'User-Agent': 'Signal-Agent/1.0; +https://chief-o-brien-bot.github.io/signal/' }
+      });
+      const text = await r.text();
+      return (text.match(/<entry>/g) || []).length;
     }
   };
 

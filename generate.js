@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt, fetchTechNewsRSS } from './fetch.js';
+import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt, fetchTechNewsRSS, fetchReddit } from './fetch.js';
 import { generateBriefing } from './analyze.js';
 import { renderHTML } from './render.js';
 import { generateOgImage } from './og_image.js';
@@ -35,7 +35,7 @@ async function main() {
 
   // Fetch all data sources in parallel for speed
   console.log('[Signal] Fetching all data sources in parallel...');
-  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles, phPosts, techNews] = await Promise.all([
+  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles, phPosts, techNews, redditPosts] = await Promise.all([
     fetchHackerNews(20).catch(e => { console.warn('[Signal] HN failed:', e.message); return []; }),
     fetchGitHubTrending().catch(e => { console.warn('[Signal] GitHub failed:', e.message); return []; }),
     fetchHNNew(10).catch(e => { console.warn('[Signal] HN New failed:', e.message); return []; }),
@@ -44,9 +44,10 @@ async function main() {
     fetchDevTo(15).catch(e => { console.warn('[Signal] Dev.to failed:', e.message); return []; }),
     fetchProductHunt(10).catch(e => { console.warn('[Signal] ProductHunt failed:', e.message); return []; }),
     fetchTechNewsRSS(20).catch(e => { console.warn('[Signal] Tech News RSS failed:', e.message); return []; }),
+    fetchReddit(15).catch(e => { console.warn('[Signal] Reddit failed:', e.message); return []; }),
   ]);
 
-  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt, ${techNews.length} TechNews`);
+  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt, ${techNews.length} TechNews, ${redditPosts.length} Reddit`);
 
   // Collect recent themes + story titles to avoid repetition
   const recentThemes = [];
@@ -75,7 +76,7 @@ async function main() {
 
   // Analyze
   console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles, techNews);
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles, techNews, redditPosts);
   console.log('[Signal] Briefing generated:', briefing.headline);
 
   // Generate OG image for social sharing
@@ -202,6 +203,14 @@ async function main() {
     console.log('[Signal] Search index rebuilt.');
   } catch (e) {
     console.warn('[Signal] Search index rebuild failed:', e.message);
+  }
+
+  // Build share packs for all issues
+  try {
+    const { buildSharePacks } = await import('./share_pack.js');
+    buildSharePacks();
+  } catch (e) {
+    console.warn('[Signal] Share pack build failed:', e.message);
   }
 
   // Deploy to GitHub Pages

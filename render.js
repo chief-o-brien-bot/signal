@@ -428,6 +428,9 @@ export function renderHTML(briefing, date, issueNumber) {
     <a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=${tweetUrl}" target="_blank" rel="noopener">
       in Share on LinkedIn
     </a>
+    <a class="share-btn" href="/signal/share/issue-${issueNumber}.html" style="background:#1a1a2e;border-color:#6c63ff44;color:#6c63ff;">
+      📦 Share Pack (HN + Reddit + Twitter)
+    </a>
   </section>
 
   <footer class="footer">

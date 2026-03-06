@@ -215,6 +215,61 @@ export async function fetchTechNewsRSS(count = 20) {
     .slice(0, count);
 }
 
+// Fetch Reddit top posts from tech subreddits via RSS (r/programming, r/MachineLearning)
+export async function fetchReddit(count = 15) {
+  const subreddits = [
+    { name: 'r/programming', rss: 'https://www.reddit.com/r/programming/top.rss?t=day&limit=15' },
+    { name: 'r/MachineLearning', rss: 'https://www.reddit.com/r/MachineLearning/top.rss?t=day&limit=10' },
+    { name: 'r/technology', rss: 'https://www.reddit.com/r/technology/top.rss?t=day&limit=8' },
+  ];
+
+  const allItems = [];
+
+  await Promise.all(subreddits.map(async sub => {
+    try {
+      const response = await axios.get(sub.rss, {
+        headers: {
+          'User-Agent': 'Signal-Agent/1.0; +https://chief-o-brien-bot.github.io/signal/',
+          'Accept': 'application/rss+xml, application/atom+xml, text/xml',
+        },
+        timeout: 10000,
+      });
+
+      const parsed = await parseStringPromise(response.data, { explicitArray: true });
+      // Reddit RSS is Atom format: feed.entry
+      const feed = parsed?.feed || {};
+      const entries = feed.entry || [];
+
+      for (const entry of entries) {
+        const title = (entry.title?.[0]?._ || entry.title?.[0] || '').replace(/\s+/g, ' ').trim();
+        // Reddit entry link is the comments page; extract actual article URL from content
+        const linkEl = Array.isArray(entry.link) ? entry.link[0] : entry.link;
+        const redditUrl = typeof linkEl === 'string' ? linkEl : linkEl?.['$']?.href || '';
+
+        // Try to extract the actual article URL from the content HTML
+        const contentHtml = entry.content?.[0]?._ || entry.content?.[0] || '';
+        const linkMatch = contentHtml.match(/href="([^"]+)">\[link\]/);
+        const articleUrl = linkMatch ? linkMatch[1] : redditUrl;
+
+        if (title && articleUrl && !articleUrl.includes('reddit.com/r/') && title.length > 10) {
+          allItems.push({
+            title,
+            url: articleUrl,
+            reddit_url: redditUrl,
+            subreddit: sub.name,
+            score: 0, // RSS doesn't expose scores
+            pubDate: entry.published?.[0] || '',
+          });
+        }
+      }
+    } catch (err) {
+      // Skip failing subreddits silently
+    }
+  }));
+
+  return allItems.slice(0, count);
+}
+
 // Fetch Dev.to top articles (last 7 days)
 export async function fetchDevTo(count = 15) {
   try {
