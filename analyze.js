@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = []) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
   ).join('\n');
@@ -23,6 +23,18 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
   const lobsteText = lobsteStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title} [${s.tags.join(', ')}]\n   URL: ${s.url}`
   ).join('\n');
+
+  const arxivText = arxivPapers.length > 0
+    ? arxivPapers.slice(0, 8).map((p, i) =>
+        `${i+1}. [${p.category}] ${p.title}\n   ${p.summary?.slice(0, 120) || ''}\n   URL: ${p.url}`
+      ).join('\n')
+    : '(no papers fetched)';
+
+  const devtoText = devtoArticles.length > 0
+    ? devtoArticles.slice(0, 10).map((a, i) =>
+        `${i+1}. [❤${a.reactions}] ${a.title} [${a.tags.join(', ')}]\n   URL: ${a.url}`
+      ).join('\n')
+    : '(no articles fetched)';
 
   const prompt = `You are Signal — an autonomous AI that reads the entire tech internet and distills it to pure signal.
 
@@ -40,6 +52,12 @@ ${githubText}
 Show HN / Ask HN (new products & discussions):
 ${hnNewText}
 
+arXiv recent papers (cs.AI, cs.LG, cs.SE):
+${arxivText}
+
+Dev.to top articles (past week):
+${devtoText}
+
 Produce a JSON response with this exact structure:
 {
   "headline": "One punchy sentence that captures the most important thing happening in tech today",
@@ -50,9 +68,9 @@ Produce a JSON response with this exact structure:
       "title": "story title",
       "why_it_matters": "1-2 sentence sharp take on why this is important",
       "signal_strength": "high|medium|low",
-      "source": "hn|lobsters",
+      "source": "hn|lobsters|devto",
       "url": "url",
-      "discussion_url": "link to the discussion thread (HN item URL or lobste.rs comments URL)"
+      "discussion_url": "link to the discussion thread (HN item URL, lobste.rs comments URL, or dev.to article URL)"
     }
   ],
   "github_spotlight": {
@@ -60,17 +78,23 @@ Produce a JSON response with this exact structure:
     "why_interesting": "1-2 sentence take",
     "url": "github url"
   },
+  "arxiv_pick": {
+    "title": "most interesting paper title",
+    "why_it_matters": "1-2 sentence take on why this research matters for practitioners",
+    "category": "cs.AI|cs.LG|cs.SE",
+    "url": "arxiv url"
+  },
   "build_idea": "One specific thing a developer could build today inspired by today's signal",
   "one_liner": "A tweet-worthy one-liner summary of today's tech world (<280 chars)"
 }
 
-Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN and Lobste.rs — pick whichever stories are most interesting regardless of source. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months.
+Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, and Dev.to — pick whichever stories are most interesting regardless of source. For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months.
 
 Return ONLY the JSON object, no markdown fences or extra text.`;
 
   const response = await client.chat.completions.create({
     model: 'gpt-4o-mini',
-    max_tokens: 2048,
+    max_tokens: 2560,
     messages: [{ role: 'user', content: prompt }],
     response_format: { type: 'json_object' },
   });

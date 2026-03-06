@@ -1,9 +1,10 @@
 /**
  * Signal: Data fetcher
- * Pulls from HN API and GitHub trending
+ * Pulls from HN API, GitHub trending, arXiv, Dev.to
  */
 
 import axios from 'axios';
+import { parseStringPromise } from 'xml2js';
 
 // Fetch top HN stories with details
 export async function fetchHackerNews(count = 20) {
@@ -94,4 +95,60 @@ export async function fetchHNNew(count = 10) {
       score: s.score || 0,
       hn_url: `https://news.ycombinator.com/item?id=${s.id}`,
     }));
+}
+
+// Fetch arXiv recent CS papers (cs.AI, cs.LG, cs.SE)
+export async function fetchArXiv(count = 10) {
+  const categories = ['cs.AI', 'cs.LG', 'cs.SE'];
+  const results = [];
+
+  for (const cat of categories) {
+    try {
+      const url = `https://export.arxiv.org/api/query?search_query=cat:${cat}&sortBy=submittedDate&sortOrder=descending&max_results=5`;
+      const response = await axios.get(url, {
+        headers: { 'User-Agent': 'Signal-Agent/1.0' },
+        timeout: 10000,
+      });
+
+      const parsed = await parseStringPromise(response.data);
+      const entries = parsed?.feed?.entry || [];
+
+      for (const entry of entries) {
+        const title = entry.title?.[0]?.replace(/\s+/g, ' ').trim();
+        const summary = entry.summary?.[0]?.replace(/\s+/g, ' ').trim().slice(0, 200);
+        const id = entry.id?.[0];
+        const authors = entry.author?.slice(0, 3).map(a => a.name?.[0]).join(', ');
+        const arxivUrl = id?.replace('http://', 'https://').replace('/abs/', '/abs/');
+
+        if (title && arxivUrl) {
+          results.push({ title, summary, url: arxivUrl, category: cat, authors });
+        }
+      }
+    } catch (err) {
+      // Skip failing categories
+    }
+  }
+
+  return results.slice(0, count);
+}
+
+// Fetch Dev.to top articles (last 7 days)
+export async function fetchDevTo(count = 15) {
+  try {
+    const response = await axios.get(
+      `https://dev.to/api/articles?top=7&per_page=${count}`,
+      { headers: { 'User-Agent': 'Signal-Agent/1.0' }, timeout: 10000 }
+    );
+
+    return response.data.map(a => ({
+      title: a.title,
+      url: a.url,
+      reactions: a.public_reactions_count || 0,
+      comments: a.comments_count || 0,
+      tags: a.tag_list || [],
+      description: a.description?.slice(0, 150),
+    }));
+  } catch (err) {
+    return [];
+  }
 }

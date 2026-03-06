@@ -60,6 +60,7 @@ export async function notifyTelegram(summary, briefing) {
 
   const stories = briefing?.top_stories?.slice(0, 3) || [];
   const githubSpotlight = briefing?.github_spotlight || null;
+  const arxivPick = briefing?.arxiv_pick || null;
   const buildIdea = briefing?.build_idea || null;
 
   // Format top stories
@@ -84,6 +85,12 @@ export async function notifyTelegram(summary, briefing) {
   if (githubSpotlight) {
     lines.push(`🔭 <b>GITHUB:</b> ${escapeHtml(githubSpotlight.name)}`);
     lines.push(`   ${escapeHtml(githubSpotlight.why_interesting)}`);
+    lines.push(``);
+  }
+
+  if (arxivPick) {
+    lines.push(`🔬 <b>RESEARCH:</b> <a href="${escapeHtml(arxivPick.url)}">${escapeHtml(arxivPick.title?.slice(0, 80))}</a>`);
+    lines.push(`   ${escapeHtml(arxivPick.why_it_matters?.slice(0, 120))}`);
     lines.push(``);
   }
 

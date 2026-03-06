@@ -17,7 +17,7 @@ export function renderHTML(briefing, date, issueNumber) {
       </div>
       <h3><a href="${escapeHtml(story.url)}" target="_blank" rel="noopener">${escapeHtml(story.title)}</a></h3>
       <p class="take">${escapeHtml(story.why_it_matters)}</p>
-      <a class="hn-link" href="${escapeHtml(story.discussion_url)}" target="_blank" rel="noopener">→ discuss on ${story.source === 'lobsters' ? 'Lobste.rs' : 'HN'}</a>
+      <a class="hn-link" href="${escapeHtml(story.discussion_url)}" target="_blank" rel="noopener">→ discuss on ${story.source === 'lobsters' ? 'Lobste.rs' : story.source === 'devto' ? 'Dev.to' : 'HN'}</a>
     </article>
   `).join('');
 
@@ -26,6 +26,15 @@ export function renderHTML(briefing, date, issueNumber) {
       <div class="section-label">GITHUB SPOTLIGHT</div>
       <h3><a href="${escapeHtml(briefing.github_spotlight.url)}" target="_blank" rel="noopener">${escapeHtml(briefing.github_spotlight.name)}</a></h3>
       <p>${escapeHtml(briefing.github_spotlight.why_interesting)}</p>
+    </section>
+  ` : '';
+
+  const arxivHTML = briefing.arxiv_pick ? `
+    <section class="arxiv-pick">
+      <div class="section-label">RESEARCH SIGNAL — arXiv</div>
+      <h3><a href="${escapeHtml(briefing.arxiv_pick.url)}" target="_blank" rel="noopener">${escapeHtml(briefing.arxiv_pick.title)}</a></h3>
+      <p>${escapeHtml(briefing.arxiv_pick.why_it_matters)}</p>
+      <span class="arxiv-cat">${escapeHtml(briefing.arxiv_pick.category || 'cs.AI')}</span>
     </section>
   ` : '';
 
@@ -173,22 +182,34 @@ export function renderHTML(briefing, date, issueNumber) {
     }
     .hn-link:hover { color: var(--accent); }
 
-    .github-spotlight, .build-idea {
+    .github-spotlight, .build-idea, .arxiv-pick {
       border: 1px solid var(--border);
       background: var(--surface);
       border-radius: 4px;
       padding: 24px;
       margin-bottom: 32px;
     }
-    .github-spotlight h3 {
+    .arxiv-pick { border-left: 3px solid #8b5cf6; }
+    .github-spotlight h3, .arxiv-pick h3 {
       font-size: 16px;
       margin-bottom: 10px;
       font-family: 'Georgia', serif;
     }
-    .github-spotlight p, .build-idea p {
+    .github-spotlight p, .build-idea p, .arxiv-pick p {
       color: #aaaacc;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 13px;
+    }
+    .arxiv-cat {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 2px 8px;
+      background: #1a1a2e;
+      border: 1px solid #8b5cf6;
+      color: #8b5cf6;
+      font-size: 10px;
+      letter-spacing: 2px;
+      border-radius: 2px;
     }
 
     .footer {
@@ -257,6 +278,7 @@ export function renderHTML(briefing, date, issueNumber) {
     </section>
 
     ${githubHTML}
+    ${arxivHTML}
     ${buildHTML}
   </main>
 
