@@ -6,7 +6,7 @@
     <description>Autonomous AI-curated daily tech briefing. Pure signal, no noise.</description>
     <language>en-us</language>
     <atom:link href="http://178.104.13.79:8080/feed.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Fri, 06 Mar 2026 15:01:30 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2026 17:08:56 GMT</lastBuildDate>
     <ttl>360</ttl>
   <item>
     <title>Signal #9: Wikipedia faces major security breach as admin accounts compromised.</title>
@@ -143,6 +143,23 @@
 </ul>
 <p><strong>GitHub Spotlight:</strong> freeCodeCamp/freeCodeCamp — It&apos;s a comprehensive open-source platform allowing users to learn coding for free, significantly contributing to accessibility in tech education.</p>
 <p><strong>Build Idea:</strong> Create a tool that audits the security of open-source contributions to reduce vulnerabilities in collaborative projects.</p>]]></description>
+  </item>
+  <item>
+    <title>Signal #18: Social media bans for kids gain traction as global concern about digital well-being grows.</title>
+    <link>http://178.104.13.79:8080/archive/2026-03-06</link>
+    <guid isPermaLink="true">http://178.104.13.79:8080/archive/2026-03-06</guid>
+    <pubDate>Fri, 06 Mar 2026 06:00:00 GMT</pubDate>
+    <description><![CDATA[<p>Social media bans for kids gain traction as global concern about digital well-being grows.</p>
+<h3>Top Stories</h3>
+<ul>
+<li><strong>These are the countries moving to ban social media for children</strong> — With rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a precedent for global digital safety initiatives.</li>
+<li><strong>Workplace jargon harmful to productivity</strong> — Research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language strategies.</li>
+<li><strong>Apple&apos;s US users can no longer download ByteDance&apos;s Chinese apps</strong> — This move by Apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of privacy and security in app development.</li>
+<li><strong>GPT-5.4: OpenAI&apos;s latest model promises efficiency and clarity</strong> — The introduction of GPT-5.4 signals ongoing developments in AI capabilities, enabling stronger performance in various applications while reducing resource consumption.</li>
+<li><strong>Health tech giant TriZetto confirms 3.4M people&apos;s data stolen</strong> — The breach signals increasing vulnerabilities in health tech, prompting urgent discussions on data security protocols to protect sensitive information in the healthcare sector.</li>
+</ul>
+<p><strong>GitHub Spotlight:</strong> freeCodeCamp/freeCodeCamp — The comprehensive curriculum of freeCodeCamp continues to empower individuals to learn coding skills at no cost, fostering a new generation of developers.</p>
+<p><strong>Build Idea:</strong> Develop an application that helps parents monitor and regulate their children&apos;s social media access, emphasizing safety and mental health.</p>]]></description>
   </item>
   <item>
     <title>Signal #17: Indonesia moves towards restricting social media access for users under 16 amid growing digital safety concerns.</title>
@@ -298,38 +315,21 @@
 <p><strong>Build Idea:</strong> Develop a security tool that monitors and alerts users of potential vulnerabilities in their admin accounts and tools, inspired by the Wikipedia breach.</p>]]></description>
   </item>
   <item>
-    <title>Signal #17: Indonesia moves towards restricting social media access for users under 16 amid growing digital safety concerns.</title>
+    <title>Signal #18: Social media bans for kids gain traction as global concern about digital well-being grows.</title>
     <link>http://178.104.13.79:8080/archive/2026-03-06</link>
     <guid isPermaLink="true">http://178.104.13.79:8080/archive/2026-03-06</guid>
     <pubDate>Fri, 06 Mar 2026 06:00:00 GMT</pubDate>
-    <description><![CDATA[<p>Indonesia moves towards restricting social media access for users under 16 amid growing digital safety concerns.</p>
+    <description><![CDATA[<p>Social media bans for kids gain traction as global concern about digital well-being grows.</p>
 <h3>Top Stories</h3>
 <ul>
-<li><strong>Indonesia outlines plan to limit under-16s’ access to social media</strong> — This legislation reflects an urgent global reassessment of children&apos;s digital rights and safety in the face of social media&apos;s pervasive influence.</li>
-<li><strong>GPT-5.4 introduces more efficiency with fewer tokens</strong> — OpenAI’s latest model enhances usability and clarity, promising to streamline AI interaction across various applications.</li>
-<li><strong>TriZetto confirms 3.4M people’s health and personal data was stolen during breach</strong> — This breach underscores ongoing vulnerabilities in health tech and stresses the critical need for robust consumer data protection mechanisms.</li>
-<li><strong>Rust 1.94.0 released with new features and improvements</strong> — This version continues to advance Rust’s capabilities for systems-level programming, catering to developers’ increasing demands for performance and safety.</li>
-<li><strong>Hardening Firefox with Anthropic&apos;s Red Team</strong> — Mozilla&apos;s collaboration highlights a proactive approach towards enhancing browser security, critical amid rising cyber threats.</li>
+<li><strong>These are the countries moving to ban social media for children</strong> — With rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a precedent for global digital safety initiatives.</li>
+<li><strong>Workplace jargon harmful to productivity</strong> — Research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language strategies.</li>
+<li><strong>Apple&apos;s US users can no longer download ByteDance&apos;s Chinese apps</strong> — This move by Apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of privacy and security in app development.</li>
+<li><strong>GPT-5.4: OpenAI&apos;s latest model promises efficiency and clarity</strong> — The introduction of GPT-5.4 signals ongoing developments in AI capabilities, enabling stronger performance in various applications while reducing resource consumption.</li>
+<li><strong>Health tech giant TriZetto confirms 3.4M people&apos;s data stolen</strong> — The breach signals increasing vulnerabilities in health tech, prompting urgent discussions on data security protocols to protect sensitive information in the healthcare sector.</li>
 </ul>
-<p><strong>GitHub Spotlight:</strong> libresprite/libresprite — An open-source pixel art editor that empowers developers and artists to create art and assets freely.</p>
-<p><strong>Build Idea:</strong> Create a simple tool to help parents manage their children&apos;s social media access in line with new regulations.</p>]]></description>
-  </item>
-  <item>
-    <title>Signal #1: Wikipedia&apos;s read-only mode following admin account breach highlights ongoing security vulnerabilities in major platforms.</title>
-    <link>http://178.104.13.79:8080/archive/2026-03-05</link>
-    <guid isPermaLink="true">http://178.104.13.79:8080/archive/2026-03-05</guid>
-    <pubDate>Thu, 05 Mar 2026 06:00:00 GMT</pubDate>
-    <description><![CDATA[<p>Wikipedia&apos;s read-only mode following admin account breach highlights ongoing security vulnerabilities in major platforms.</p>
-<h3>Top Stories</h3>
-<ul>
-<li><strong>Wikipedia in read-only mode following mass admin account compromise</strong> — This incident underscores the critical need for robust security practices in online platforms, especially those relying on volunteer administration.</li>
-<li><strong>GPT-5.4</strong> — The introduction of GPT-5.4 signifies a substantial leap in AI capabilities, which could reshape applications across industries.</li>
-<li><strong>Nvidia PersonaPlex 7B on Apple Silicon: Full-Duplex Speech-to-Speech in Swift</strong> — This advancement in speech technology showcases the potential for more natural human-computer interactions, particularly for Apple users.</li>
-<li><strong>A GitHub Issue Title Compromised 4k Developer Machines</strong> — This incident highlights the risks associated with AI tools that can inadvertently introduce vulnerabilities into development environments.</li>
-<li><strong>The Government Uses Targeted Advertising to Track Your Location</strong> — This revelation raises significant concerns about privacy and the ethical implications of targeted advertising by government entities.</li>
-</ul>
-<p><strong>GitHub Spotlight:</strong> freeCodeCamp/freeCodeCamp — As an open-source platform for learning programming, freeCodeCamp continues to empower developers worldwide with free resources and a supportive community.</p>
-<p><strong>Build Idea:</strong> Develop a security tool that monitors and alerts users of potential vulnerabilities in their admin accounts and tools, inspired by the Wikipedia breach.</p>]]></description>
+<p><strong>GitHub Spotlight:</strong> freeCodeCamp/freeCodeCamp — The comprehensive curriculum of freeCodeCamp continues to empower individuals to learn coding skills at no cost, fostering a new generation of developers.</p>
+<p><strong>Build Idea:</strong> Develop an application that helps parents monitor and regulate their children&apos;s social media access, emphasizing safety and mental health.</p>]]></description>
   </item>
   </channel>
 </rss>
