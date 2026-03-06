@@ -1,9 +1,9 @@
 {
-  "issue": 4,
+  "issue": 6,
   "date": "2026-03-06",
-  "headline": "Mass compromise of Wikipedia admin accounts highlights ongoing cybersecurity vulnerabilities.",
-  "theme": "Cybersecurity Concerns",
-  "one_liner": "Today’s tech landscape reveals critical security lapses and emphasizes the need for robust solutions in both software and trade policies.",
+  "headline": "Wikipedia's vulnerability underscores critical security issues in digital platforms.",
+  "theme": "Security & AI",
+  "one_liner": "Today's tech highlights the urgent need for better security practices as vulnerabilities in well-known platforms disrupt user trust.",
   "story_count": 5,
-  "arxiv_pick": "Robustness of Agentic AI Systems via Adversarially-Aligned Jacobian Regularization"
+  "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
 }

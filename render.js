@@ -45,8 +45,12 @@ export function renderHTML(briefing, date, issueNumber) {
     </section>
   ` : '';
 
-  const canonicalUrl = `http://178.104.13.79:8080/`;
+  const canonicalUrl = `https://chief-o-brien-bot.github.io/signal/`;
+  const ghPagesUrl = `https://chief-o-brien-bot.github.io/signal/`;
   const description = escapeHtml(briefing.headline || 'Daily tech signal from the noise');
+  const tweetText = encodeURIComponent(`Signal #${issueNumber}: ${briefing.theme || 'Tech'} — AI-curated daily tech briefing\n\n${briefing.headline || ''}\n\n`);
+  const tweetUrl = encodeURIComponent(ghPagesUrl);
+  const shareOnX = `https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -60,16 +64,17 @@ export function renderHTML(briefing, date, issueNumber) {
   <meta property="og:type" content="article">
   <meta property="og:title" content="Signal #${issueNumber}: ${escapeHtml(briefing.theme || 'Tech')} — ${date}">
   <meta property="og:description" content="${description}">
-  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:url" content="${ghPagesUrl}">
   <meta property="og:site_name" content="Signal — AI Tech Briefing">
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Signal #${issueNumber}: ${escapeHtml(briefing.theme || 'Tech')}">
   <meta name="twitter:description" content="${description}">
+  <meta name="twitter:site" content="@signalbriefing">
 
   <!-- Canonical -->
-  <link rel="canonical" href="${canonicalUrl}">
+  <link rel="canonical" href="${ghPagesUrl}">
   <link rel="alternate" type="application/rss+xml" title="Signal RSS" href="/feed.xml">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -321,6 +326,39 @@ export function renderHTML(briefing, date, issueNumber) {
     .subscribe-form button:hover { opacity: 0.85; }
     .subscribe-form button:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    .share-section {
+      max-width: 720px;
+      margin: 0 auto 32px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .share-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 10px 22px;
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      margin: 4px;
+    }
+    .share-btn:hover { background: #111; border-color: #555; text-decoration: none; }
+    .share-btn.linkedin { background: #0a66c2; border-color: #0a66c2; }
+    .share-btn.linkedin:hover { background: #0854a0; }
+
     @media (max-width: 600px) {
       .main { padding: 20px 16px; }
       .subscribe-form input[type="email"] { width: 100%; }
@@ -371,6 +409,16 @@ export function renderHTML(briefing, date, issueNumber) {
       </form>
       <div id="subscribe-msg" style="display:none; margin-top: 10px; font-size: 12px; color: var(--green); letter-spacing: 1px;"></div>
     </div>
+  </section>
+
+  <section class="share-section">
+    <div class="share-label">Share This Issue</div>
+    <a class="share-btn" href="${shareOnX}" target="_blank" rel="noopener">
+      𝕏 Share on X
+    </a>
+    <a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=${tweetUrl}" target="_blank" rel="noopener">
+      in Share on LinkedIn
+    </a>
   </section>
 
   <footer class="footer">

@@ -112,13 +112,13 @@ async function main() {
     console.warn('[Signal] Archive index rebuild failed:', e.message);
   }
 
-  // Send Telegram notification
+  // Rebuild sitemap
   try {
-    const { notifyTelegram } = await import('./telegram_notify.js');
-    await notifyTelegram(summary, briefing);
-    console.log('[Signal] Telegram notification sent.');
+    const { buildSitemap } = await import('./sitemap.js');
+    buildSitemap();
+    console.log('[Signal] Sitemap rebuilt.');
   } catch (e) {
-    console.warn('[Signal] Telegram notification failed:', e.message);
+    console.warn('[Signal] Sitemap rebuild failed:', e.message);
   }
 
   // Deploy to GitHub Pages
@@ -126,6 +126,15 @@ async function main() {
     execSync(`bash ${__dirname}/deploy-gh-pages.sh`, { cwd: __dirname, stdio: 'inherit' });
   } catch (e) {
     console.warn('[Signal] GitHub Pages deploy failed:', e.message);
+  }
+
+  // Send Telegram notification
+  try {
+    const { notifyTelegram } = await import('./telegram_notify.js');
+    await notifyTelegram();
+    console.log('[Signal] Telegram notification sent.');
+  } catch (e) {
+    console.warn('[Signal] Telegram notify failed:', e.message);
   }
 
   return summary;
