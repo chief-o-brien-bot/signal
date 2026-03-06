@@ -1,15 +1,14 @@
 /**
- * Signal: OpenAI analysis engine
+ * Signal: AI analysis engine
  * Takes raw data and produces a curated briefing
+ * Uses Anthropic Claude via claude-agent-sdk
  */
 
-import OpenAI from 'openai';
+import { complete } from './claude.js';
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = [], techNews = [], redditPosts = []) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = [], techNews = [], redditPosts = [], hnCommentMap = {}) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
-    `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
+    `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}\n   HN Discussion: ${s.hn_url || `https://news.ycombinator.com/item?id=${s.id}`}`
   ).join('\n');
 
   const githubText = githubRepos.slice(0, 8).map((r, i) =>
@@ -17,11 +16,11 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
   ).join('\n');
 
   const hnNewText = hnNew.slice(0, 6).map((s, i) =>
-    `${i+1}. ${s.title}\n   ${s.url}`
+    `${i+1}. ${s.title}\n   URL: ${s.url}\n   HN Discussion: ${s.hn_url || `https://news.ycombinator.com/item?id=${s.id}`}`
   ).join('\n');
 
   const lobsteText = lobsteStories.slice(0, 15).map((s, i) =>
-    `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title} [${s.tags.join(', ')}]\n   URL: ${s.url}`
+    `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title} [${s.tags.join(', ')}]\n   URL: ${s.url}\n   Lobste.rs Discussion: ${s.lobste_url || s.url}`
   ).join('\n');
 
   const arxivText = arxivPapers.length > 0
@@ -53,6 +52,14 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
         `${i+1}. [${p.subreddit}, ↑${p.score}] ${p.title}\n   URL: ${p.url}`
       ).join('\n')
     : '(no reddit posts fetched)';
+
+
+  const hnCommentsText = Object.keys(hnCommentMap).length > 0
+    ? Object.entries(hnCommentMap).map(([id, data]) =>
+        `Story: "${data.title}" (HN:${id})\n` +
+        data.comments.map((c, i) => `  Comment ${i+1} (${c.by}): "${c.text}"`).join('\n')
+      ).join('\n\n')
+    : '(no HN comments fetched)';
 
   const themeAvoidance = recentThemes.length > 0
     ? `\n⚠️ THEME DIVERSITY: The last ${recentThemes.length} issues used these themes: [${recentThemes.join(', ')}]. DO NOT repeat these themes. Choose a genuinely different angle from today's data.\n`
@@ -94,6 +101,9 @@ ${techNewsText}
 Reddit top posts (r/programming, r/MachineLearning, r/technology — sorted by upvotes today):
 ${redditText}
 
+HN Discussion Comments (top comments from active HN stories — use these to write community_take for HN-sourced stories):
+${hnCommentsText}
+
 Produce a JSON response with this exact structure:
 {
   "headline": "One punchy sentence that captures the most important thing happening in tech today",
@@ -106,7 +116,8 @@ Produce a JSON response with this exact structure:
       "signal_strength": "high|medium|low",
       "source": "hn|lobsters|devto",
       "url": "url",
-      "discussion_url": "link to the discussion thread (HN item URL, lobste.rs comments URL, or dev.to article URL)"
+      "discussion_url": "link to the discussion thread (HN item URL, lobste.rs comments URL, or dev.to article URL)",
+      "community_take": "For HN-sourced stories with comments above: 1-2 sharp sentences distilling what the HN community thinks. Capture consensus, insightful technical points, or notable skepticism. null for non-HN stories or if no comments available."
     }
   ],
   "github_spotlight": {
@@ -126,15 +137,12 @@ Produce a JSON response with this exact structure:
 
 Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, ProductHunt, mainstream tech media, and Reddit — pick whichever stories are most interesting regardless of source. For the "source" field use: "hn", "lobsters", "devto", "producthunt", "technews", "reddit". For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. Mainstream tech media and Reddit posts can be excellent signal if they cover genuinely important developments.
 
+For any HN-sourced story, if HN discussion comments are provided above, include a community_take that distills the HN hive mind's reaction. Be specific about what commenters actually said — don't be generic.
+
 Return ONLY the JSON object, no markdown fences or extra text.`;
 
-  const response = await client.chat.completions.create({
-    model: 'gpt-4o-mini',
-    max_tokens: 2560,
-    messages: [{ role: 'user', content: prompt }],
-    response_format: { type: 'json_object' },
-  });
-
-  const text = response.choices[0].message.content;
-  return JSON.parse(text);
+  const text = await complete(prompt, { model: 'claude-sonnet-4-6' });
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) throw new Error('No JSON found in Claude response');
+  return JSON.parse(jsonMatch[0]);
 }

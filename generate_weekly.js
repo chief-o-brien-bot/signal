@@ -8,10 +8,10 @@ import { execSync } from 'child_process';
 import { writeFileSync, readFileSync, existsSync, readdirSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import OpenAI from 'openai';
+import { complete } from './claude.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const ARCHIVE_DIR = path.join(PUBLIC_DIR, 'archive');
@@ -69,7 +69,7 @@ function loadAllIssues() {
   return issues;
 }
 
-// ─── OpenAI: pick best-of-week ────────────────────────────────────────────────
+// ─── Claude: pick best-of-week ───────────────────────────────────────────────
 
 async function generateWeeklyBriefing(issues, weekNumber, dateRange) {
   // Collect all stories with issue context
@@ -151,14 +151,10 @@ Return JSON with this exact structure:
 
 Pick the 7 most important stories of the week. Prioritize HIGH signal stories. Where stories are similar (like multiple Wikipedia breach stories), pick the one with the most depth. Be a discerning editor. Return ONLY the JSON object, no markdown fences.`;
 
-  const response = await client.chat.completions.create({
-    model: 'gpt-4o-mini',
-    max_tokens: 3000,
-    messages: [{ role: 'user', content: prompt }],
-    response_format: { type: 'json_object' },
-  });
-
-  return JSON.parse(response.choices[0].message.content);
+  const text = await complete(prompt, { model: 'claude-sonnet-4-6' });
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) throw new Error('No JSON found in Claude response');
+  return JSON.parse(jsonMatch[0]);
 }
 
 // ─── HTML Renderer ────────────────────────────────────────────────────────────
@@ -396,7 +392,7 @@ async function main() {
   const weekNumber = getWeeklyDigestNumber();
   console.log(`[Weekly] This is Weekly Digest #${weekNumber}`);
 
-  console.log('[Weekly] Calling OpenAI for weekly curation...');
+  console.log('[Weekly] Calling Claude for weekly curation...');
   const digest = await generateWeeklyBriefing(sortedIssues, weekNumber, dateRange);
   console.log(`[Weekly] Theme: ${digest.week_theme}`);
   console.log(`[Weekly] Stories selected: ${digest.top_stories?.length || 0}`);

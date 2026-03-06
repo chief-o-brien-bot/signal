@@ -7,6 +7,7 @@
 import 'dotenv/config';
 import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt, fetchTechNewsRSS, fetchReddit } from './fetch.js';
 import { generateBriefing } from './analyze.js';
+import { fetchAllHNComments } from './enrich_hn.js';
 import { renderHTML } from './render.js';
 import { generateOgImage } from './og_image.js';
 import fs from 'fs';
@@ -23,6 +24,13 @@ async function main() {
 
   fs.mkdirSync(outputDir, { recursive: true });
   fs.mkdirSync(archiveDir, { recursive: true });
+
+  // One issue per day — bail out if today's already been generated
+  const todayJson = path.join(archiveDir, `${today}.json`);
+  if (fs.existsSync(todayJson)) {
+    console.log(`[Signal] Issue for ${today} already exists. Skipping.`);
+    process.exit(0);
+  }
 
   // Determine issue number
   const issuePath = path.join(__dirname, 'issue_count.txt');
@@ -49,16 +57,29 @@ async function main() {
 
   console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt, ${techNews.length} TechNews, ${redditPosts.length} Reddit`);
 
-  // Collect recent themes + story titles to avoid repetition
+  // Collect ALL past themes + recent story titles to avoid repetition
   const recentThemes = [];
   const recentStoryTitles = [];
-  for (let i = Math.max(1, issueNumber - 5); i < issueNumber; i++) {
+  // Broad theme normalization map — collapse variations into canonical topic names
+  const normalizeTheme = (t) => {
+    if (!t) return null;
+    const lower = t.toLowerCase();
+    if (lower.includes('security') || lower.includes('breach') || lower.includes('hack') || lower.includes('cyber') || lower.includes('vulnerab') || lower.includes('privacy')) return 'Security/Privacy';
+    if (lower.includes('ai') || lower.includes('artificial intelligence') || lower.includes('machine learning') || lower.includes('llm') || lower.includes('neural')) return 'AI/ML';
+    return t; // keep as-is
+  };
+  for (let i = Math.max(1, issueNumber - 20); i < issueNumber; i++) {
     try {
       const prevJson = JSON.parse(fs.readFileSync(path.join(archiveDir, `issue-${i}.json`), 'utf-8'));
-      const t = prevJson?.briefing?.theme;
-      if (t) recentThemes.push(t);
-      // Collect all top story titles from last 3 issues
-      if (i >= issueNumber - 3 && prevJson?.briefing?.top_stories) {
+      const rawTheme = prevJson?.briefing?.theme;
+      const normalized = normalizeTheme(rawTheme);
+      if (normalized && !recentThemes.includes(normalized)) {
+        recentThemes.push(normalized);
+      } else if (rawTheme && !recentThemes.includes(rawTheme)) {
+        recentThemes.push(rawTheme);
+      }
+      // Collect all top story titles from last 5 issues
+      if (i >= issueNumber - 5 && prevJson?.briefing?.top_stories) {
         prevJson.briefing.top_stories.forEach(s => {
           if (s.title && !recentStoryTitles.includes(s.title)) {
             recentStoryTitles.push(s.title);
@@ -74,10 +95,22 @@ async function main() {
     console.log(`[Signal] Recent stories (avoiding ${recentStoryTitles.length} titles)`);
   }
 
-  // Analyze
-  console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles, techNews, redditPosts);
+  // Pre-fetch HN comments for enrichment (HTTP only, no AI)
+  console.log('[Signal] Fetching HN comments for enrichment...');
+  let hnCommentMap = {};
+  try {
+    hnCommentMap = await fetchAllHNComments(hnStories);
+    console.log(`[Signal] Got comments for ${Object.keys(hnCommentMap).length} HN stories`);
+  } catch (e) {
+    console.warn('[Signal] HN comment fetch failed (non-fatal):', e.message);
+  }
+
+  // Analyze + enrich in one Claude call
+  console.log('[Signal] Analyzing with Claude (single prompt with HN comments)...');
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles, techNews, redditPosts, hnCommentMap);
   console.log('[Signal] Briefing generated:', briefing.headline);
+  const enrichedCount = (briefing.top_stories || []).filter(s => s.community_take).length;
+  if (enrichedCount > 0) console.log(`[Signal] ${enrichedCount} stories have community takes`);
 
   // Generate OG image for social sharing
   const ogDir = path.join(outputDir, 'og');
@@ -213,6 +246,15 @@ async function main() {
     console.warn('[Signal] Share pack build failed:', e.message);
   }
 
+  // Build themes/topics archive page
+  try {
+    const { buildThemesPage } = await import('./build_themes.js');
+    buildThemesPage();
+    console.log('[Signal] Themes page rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Themes page build failed:', e.message);
+  }
+
   // Deploy to GitHub Pages
   try {
     execSync(`bash ${__dirname}/deploy-gh-pages.sh`, { cwd: __dirname, stdio: 'inherit' });
@@ -227,6 +269,33 @@ async function main() {
     console.log('[Signal] Telegram notification sent.');
   } catch (e) {
     console.warn('[Signal] Telegram notify failed:', e.message);
+  }
+
+  // Send email digest to subscribers
+  try {
+    const { execSync: exec } = await import('child_process');
+    exec(`node ${__dirname}/send_digest.js ${issueNumber}`, { cwd: __dirname, stdio: 'inherit' });
+    console.log('[Signal] Email digest sent.');
+  } catch (e) {
+    console.warn('[Signal] Email digest failed:', e.message);
+  }
+
+  // Ping RSS discovery services
+  try {
+    const { pingRSS } = await import('./ping_rss.js');
+    await pingRSS(issueNumber);
+    console.log('[Signal] RSS pinged.');
+  } catch (e) {
+    console.warn('[Signal] RSS ping failed:', e.message);
+  }
+
+  // Rebuild stats page
+  try {
+    const { execSync: execStats } = await import('child_process');
+    execStats(`node ${__dirname}/build_stats.js`, { cwd: __dirname, stdio: 'inherit' });
+    console.log('[Signal] Stats page rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Stats page build failed:', e.message);
   }
 
   return summary;
