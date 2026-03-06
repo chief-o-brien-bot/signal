@@ -47,9 +47,34 @@ async function main() {
 
   console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt`);
 
+  // Collect recent themes + story titles to avoid repetition
+  const recentThemes = [];
+  const recentStoryTitles = [];
+  for (let i = Math.max(1, issueNumber - 5); i < issueNumber; i++) {
+    try {
+      const prevJson = JSON.parse(fs.readFileSync(path.join(archiveDir, `issue-${i}.json`), 'utf-8'));
+      const t = prevJson?.briefing?.theme;
+      if (t) recentThemes.push(t);
+      // Collect all top story titles from last 3 issues
+      if (i >= issueNumber - 3 && prevJson?.briefing?.top_stories) {
+        prevJson.briefing.top_stories.forEach(s => {
+          if (s.title && !recentStoryTitles.includes(s.title)) {
+            recentStoryTitles.push(s.title);
+          }
+        });
+      }
+    } catch {}
+  }
+  if (recentThemes.length > 0) {
+    console.log(`[Signal] Recent themes (avoiding): ${recentThemes.join(', ')}`);
+  }
+  if (recentStoryTitles.length > 0) {
+    console.log(`[Signal] Recent stories (avoiding ${recentStoryTitles.length} titles)`);
+  }
+
   // Analyze
   console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts);
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts, recentThemes, recentStoryTitles);
   console.log('[Signal] Briefing generated:', briefing.headline);
 
   // Generate OG image for social sharing

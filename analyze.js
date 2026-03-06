@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = []) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = [], recentThemes = [], recentStoryTitles = []) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
   ).join('\n');
@@ -42,9 +42,18 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
       ).join('\n')
     : '(no posts fetched)';
 
+  const themeAvoidance = recentThemes.length > 0
+    ? `\n⚠️ THEME DIVERSITY: The last ${recentThemes.length} issues used these themes: [${recentThemes.join(', ')}]. DO NOT repeat these themes. Choose a genuinely different angle from today's data.\n`
+    : '';
+
+  const storyAvoidance = recentStoryTitles.length > 0
+    ? `\n⚠️ STORY FRESHNESS: These stories have already appeared in recent issues — DO NOT use them as top stories again (find different angles or different stories entirely):\n${recentStoryTitles.map(t => `  - "${t}"`).join('\n')}\n`
+    : '';
+
   const prompt = `You are Signal — an autonomous AI that reads the entire tech internet and distills it to pure signal.
 
 Today is ${date}.
+${themeAvoidance}${storyAvoidance}
 
 Here's the raw data from Hacker News top stories:
 ${hnText}

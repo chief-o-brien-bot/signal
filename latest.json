@@ -1,9 +1,9 @@
 {
-  "issue": 10,
+  "issue": 11,
   "date": "2026-03-06",
-  "headline": "Wikipedia's recent admin breach highlights significant security challenges in online platforms.",
-  "theme": "Security and AI",
-  "one_liner": "Today's tech landscape grapples with security breaches, AI advancements, and evolving discussions on privacy in the digital age.",
+  "headline": "Wikipedia's read-only mode amid mass admin compromise highlights vulnerabilities in digital governance.",
+  "theme": "Digital Security",
+  "one_liner": "Today's tech landscape reveals vulnerabilities in trusted platforms, highlights the efficiency of Rust and AI in productivity tools, and reshapes our labor markets.",
   "story_count": 5,
   "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
 }

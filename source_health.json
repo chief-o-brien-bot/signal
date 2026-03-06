@@ -1,5 +1,53 @@
 [
   {
+    "checked_at": "2026-03-06T10:03:33.396Z",
+    "sources": {
+      "arXiv": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 30,
+        "last_checked": "2026-03-06T10:03:33.429Z"
+      },
+      "ProductHunt": {
+        "status": "empty",
+        "count": 0,
+        "latency_ms": 42,
+        "last_checked": "2026-03-06T10:03:33.443Z"
+      },
+      "Hacker News": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 255,
+        "last_checked": "2026-03-06T10:03:33.651Z"
+      },
+      "Dev.to": {
+        "status": "healthy",
+        "count": 15,
+        "latency_ms": 297,
+        "last_checked": "2026-03-06T10:03:33.697Z"
+      },
+      "Show HN": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 313,
+        "last_checked": "2026-03-06T10:03:33.714Z"
+      },
+      "Lobste.rs": {
+        "status": "healthy",
+        "count": 25,
+        "latency_ms": 322,
+        "last_checked": "2026-03-06T10:03:33.720Z"
+      },
+      "GitHub Trending": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 476,
+        "last_checked": "2026-03-06T10:03:33.873Z"
+      }
+    },
+    "total_ms": 477
+  },
+  {
     "checked_at": "2026-03-06T09:05:15.203Z",
     "sources": {
       "ProductHunt": {

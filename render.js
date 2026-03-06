@@ -415,6 +415,11 @@ export function renderHTML(briefing, date, issueNumber) {
     </div>
   </section>
 
+  <section id="related-issues" style="max-width: 720px; margin: 32px auto; padding: 0 24px; display: none;">
+    <div style="font-size: 10px; letter-spacing: 2px; color: #888; margin-bottom: 16px; border-top: 1px solid #222; padding-top: 24px;">◈ YOU MIGHT ALSO LIKE</div>
+    <div id="related-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;"></div>
+  </section>
+
   <section class="share-section">
     <div class="share-label">Share This Issue</div>
     <a class="share-btn" href="${shareOnX}" target="_blank" rel="noopener">
@@ -472,6 +477,57 @@ export function renderHTML(briefing, date, issueNumber) {
       btn.disabled = false;
       btn.textContent = '→ SUBSCRIBE';
     });
+  </script>
+
+  <script>
+    (async () => {
+      try {
+        const base = window.location.hostname === 'chief-o-brien-bot.github.io'
+          ? 'https://chief-o-brien-bot.github.io/signal'
+          : '';
+        const res = await fetch(base + '/search-index.json');
+        if (!res.ok) return;
+        const idx = await res.json();
+        const currentIssue = ${issueNumber};
+        const currentTheme = ${JSON.stringify(briefing.theme || '')};
+        const currentHeadline = ${JSON.stringify(briefing.headline || '')};
+
+        // Score each issue by keyword overlap with current theme + headline
+        const keywords = (currentTheme + ' ' + currentHeadline).toLowerCase().split(/\\W+/).filter(w => w.length > 3);
+
+        // idx is an array of issue docs
+        const docs = Array.isArray(idx) ? idx : Object.values(idx);
+        const scored = docs
+          .filter(doc => doc.issue !== currentIssue)
+          .map(doc => {
+            const text = (doc.theme + ' ' + doc.headline + ' ' + (doc._text || '') + ' ' + (doc.one_liner || '')).toLowerCase();
+            let score = keywords.reduce((s, kw) => s + (text.includes(kw) ? 1 : 0), 0);
+            // Prefer recent issues
+            score += (doc.issue || 0) * 0.1;
+            return { ...doc, score, issueNum: doc.issue };
+          })
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3);
+
+        if (scored.length === 0) return;
+
+        const grid = document.getElementById('related-grid');
+        scored.forEach(doc => {
+          const card = document.createElement('a');
+          card.href = base + '/archive/issue-' + doc.issueNum + '.html';
+          card.style.cssText = 'display:block; padding: 14px; background: #111; border: 1px solid #222; border-radius: 6px; text-decoration: none; transition: border-color 0.2s;';
+          card.onmouseenter = () => card.style.borderColor = '#6c63ff';
+          card.onmouseleave = () => card.style.borderColor = '#222';
+          card.innerHTML = \`
+            <div style="font-size:9px; color:#6c63ff; letter-spacing:1.5px; margin-bottom:6px;">ISSUE #\${doc.issueNum} · \${doc.theme || ''}</div>
+            <div style="font-size:12px; color:#e0e0e0; line-height:1.4;">\${doc.headline || ''}</div>
+          \`;
+          grid.appendChild(card);
+        });
+
+        document.getElementById('related-issues').style.display = 'block';
+      } catch(e) { /* silently skip */ }
+    })();
   </script>
 
 </body>
