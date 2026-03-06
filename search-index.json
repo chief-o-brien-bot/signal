@@ -3,64 +3,64 @@
     "issue": 18,
     "date": "2026-03-06",
     "url": "archive/issue-18.html",
-    "theme": "Youth Digital Safety",
-    "headline": "Social media bans for kids gain traction as global concern about digital well-being grows.",
-    "one_liner": "As countries push for social media bans for kids, the tech landscape shifts to prioritize youth digital safety amid growing concerns.",
+    "theme": "Digital Age Legislation",
+    "headline": "Countries are moving to ban social media for children, sparking debates on digital freedom and child safety.",
+    "one_liner": "Global moves to regulate children's social media access raise vital questions on online freedom, as AI efforts emerge to improve urban safety and public systems.",
     "top_stories": [
       {
         "title": "These are the countries moving to ban social media for children",
-        "why": "With rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a precedent for global digital safety initiatives.",
+        "why": "As governments increasingly restrict social media for minors, this raises critical questions about digital rights, safety, and the impact on youth culture.",
         "source": "technews",
         "url": "https://techcrunch.com/2026/03/06/social-media-ban-children-countries-list/",
-        "discussion_url": "",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/10y0cz8/congress_is_considering_abolishing_your_right_to/",
         "signal_strength": "high"
       },
       {
-        "title": "Workplace jargon harmful to productivity",
-        "why": "Research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language strategies.",
-        "source": "hn",
-        "url": "https://news.cornell.edu/stories/2026/03/workers-who-love-synergizing-paradigms-might-be-bad-their-jobs",
-        "discussion_url": "https://news.cornell.edu/stories/2026/03/workers-who-love-synergizing-paradigms-might-be-bad-their-jobs",
+        "title": "City Detect, which uses AI to help cities stay safe and clean, raises $13M Series A",
+        "why": "With urban centers facing increasing challenges, this funding underscores the growing importance of AI solutions in maintaining public order and enhancing city management.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/city-detect-uses-ai-to-help-cities-stay-safe-and-clean/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47275088",
         "signal_strength": "medium"
       },
       {
-        "title": "Apple's US users can no longer download ByteDance's Chinese apps",
-        "why": "This move by Apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of privacy and security in app development.",
+        "title": "Indonesia outlines plan to limit under-16s’ access to social media",
+        "why": "Indonesia's restrictive approach to social media access for minors could set a precedent for other nations grappling with similar issues, influencing global online policies.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/indonesia-outlines-plan-to-limit-under-16s-access-to-social-media/",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/10y0cz8/congress_is_considering_abolishing_your_right_to/",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Show HN: Qurt – open-source desktop AI coworker (BYOK, agent mode)",
+        "why": "Qurt's open-source approach empowers developers and companies to create tailored AI work environments, enhancing productivity without being locked into proprietary systems.",
+        "source": "hn",
+        "url": "https://qurt.ai/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47277541",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Apple users in the US can no longer download ByteDance's Chinese apps",
+        "why": "This shift marks a significant move in the tech sector amid national security concerns, potentially affecting user choices and leading to broader implications for international tech relations.",
         "source": "technews",
         "url": "https://arstechnica.com/tech-policy/2026/03/apple-users-in-the-us-can-no-longer-download-bytedances-chinese-apps/",
-        "discussion_url": "",
+        "discussion_url": "https://www.reddit.com/r/technology/comments/10y0cz8/congress_is_considering_abolishing_your_right_to/",
         "signal_strength": "medium"
-      },
-      {
-        "title": "GPT-5.4: OpenAI's latest model promises efficiency and clarity",
-        "why": "The introduction of GPT-5.4 signals ongoing developments in AI capabilities, enabling stronger performance in various applications while reducing resource consumption.",
-        "source": "producthunt",
-        "url": "https://www.producthunt.com/products/openai",
-        "discussion_url": "https://www.producthunt.com/products/openai",
-        "signal_strength": "high"
-      },
-      {
-        "title": "Health tech giant TriZetto confirms 3.4M people's data stolen",
-        "why": "The breach signals increasing vulnerabilities in health tech, prompting urgent discussions on data security protocols to protect sensitive information in the healthcare sector.",
-        "source": "technews",
-        "url": "https://techcrunch.com/2026/03/06/trizetto-confirms-3-4m-peoples-health-and-personal-data-was-stolen-during-breach/",
-        "discussion_url": "",
-        "signal_strength": "high"
       }
     ],
     "github": {
       "name": "freeCodeCamp/freeCodeCamp",
-      "why": "The comprehensive curriculum of freeCodeCamp continues to empower individuals to learn coding skills at no cost, fostering a new generation of developers.",
+      "why": "FreeCodeCamp remains a vital resource for individuals seeking coding education, continuously adapting its curriculum to meet current tech trends.",
       "url": "https://github.com/freeCodeCamp/freeCodeCamp"
     },
     "arxiv": {
-      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
-      "why": "This paper tackles the challenges of efficient training for large language models, a critical area for developers looking to optimize model deployment and resource usage.",
-      "url": "https://arxiv.org/abs/2603.05500v1",
-      "category": "cs.LG"
+      "title": "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+      "why": "This research highlights the merging of AI and user-friendly interfaces to enhance robotics, making it easier for practitioners to implement effective robot policies.",
+      "url": "https://arxiv.org/abs/2603.05504v1",
+      "category": "cs.AI"
     },
-    "build_idea": "Develop an application that helps parents monitor and regulate their children's social media access, emphasizing safety and mental health.",
-    "_text": "youth digital safety social media bans for kids gain traction as global concern about digital well-being grows. as countries push for social media bans for kids, the tech landscape shifts to prioritize youth digital safety amid growing concerns. develop an application that helps parents monitor and regulate their children's social media access, emphasizing safety and mental health. these are the countries moving to ban social media for children with rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a precedent for global digital safety initiatives. workplace jargon harmful to productivity research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language strategies. apple's us users can no longer download bytedance's chinese apps this move by apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of privacy and security in app development. gpt-5.4: openai's latest model promises efficiency and clarity the introduction of gpt-5.4 signals ongoing developments in ai capabilities, enabling stronger performance in various applications while reducing resource consumption. health tech giant trizetto confirms 3.4m people's data stolen the breach signals increasing vulnerabilities in health tech, prompting urgent discussions on data security protocols to protect sensitive information in the healthcare sector. freecodecamp/freecodecamp the comprehensive curriculum of freecodecamp continues to empower individuals to learn coding skills at no cost, fostering a new generation of developers. poet-x: memory-efficient llm training by scaling orthogonal transformation this paper tackles the challenges of efficient training for large language models, a critical area for developers looking to optimize model deployment and resource usage."
+    "build_idea": "Develop a social media monitoring tool that helps parents understand the content their children are exposed to online, with features that comply with emerging regulations.",
+    "_text": "digital age legislation countries are moving to ban social media for children, sparking debates on digital freedom and child safety. global moves to regulate children's social media access raise vital questions on online freedom, as ai efforts emerge to improve urban safety and public systems. develop a social media monitoring tool that helps parents understand the content their children are exposed to online, with features that comply with emerging regulations. these are the countries moving to ban social media for children as governments increasingly restrict social media for minors, this raises critical questions about digital rights, safety, and the impact on youth culture. city detect, which uses ai to help cities stay safe and clean, raises $13m series a with urban centers facing increasing challenges, this funding underscores the growing importance of ai solutions in maintaining public order and enhancing city management. indonesia outlines plan to limit under-16s’ access to social media indonesia's restrictive approach to social media access for minors could set a precedent for other nations grappling with similar issues, influencing global online policies. show hn: qurt – open-source desktop ai coworker (byok, agent mode) qurt's open-source approach empowers developers and companies to create tailored ai work environments, enhancing productivity without being locked into proprietary systems. apple users in the us can no longer download bytedance's chinese apps this shift marks a significant move in the tech sector amid national security concerns, potentially affecting user choices and leading to broader implications for international tech relations. freecodecamp/freecodecamp freecodecamp remains a vital resource for individuals seeking coding education, continuously adapting its curriculum to meet current tech trends. robopocket: improve robot policies instantly with your phone this research highlights the merging of ai and user-friendly interfaces to enhance robotics, making it easier for practitioners to implement effective robot policies."
   },
   {
     "issue": 17,
