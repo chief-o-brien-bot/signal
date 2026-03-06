@@ -1,5 +1,68 @@
 [
   {
+    "issue": 13,
+    "date": "2026-03-06",
+    "url": "archive/issue-13.html",
+    "theme": "Data Privacy Trends",
+    "headline": "Emerging trends in data privacy reveal alarming security gaps in everyday tech.",
+    "one_liner": "Data privacy is on shaky ground as tech blurs the lines of surveillance and personal rights—time to rethink our strategies.",
+    "top_stories": [
+      {
+        "title": "From Ukraine to Iran, Hacking Security Cameras Is Now Part of War’s ‘Playbook’",
+        "why": "This piece underscores the increasing weaponization of everyday technology, impacting both privacy and security on a global scale.",
+        "source": "technews",
+        "url": "https://www.wired.com/story/from-ukraine-to-iran-hacking-security-cameras-is-now-part-of-wars-playbook/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273890",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Workers report watching Ray-Ban Meta-shot footage of people using the bathroom",
+        "why": "This report raises critical questions about privacy and consent in the age of smart glasses, emphasizing the need for stricter regulations.",
+        "source": "technews",
+        "url": "https://arstechnica.com/gadgets/2026/03/workers-report-watching-ray-ban-meta-shot-footage-of-people-using-the-bathroom/",
+        "discussion_url": "https://lobste.rs/s/7xfkjf/workers_report_watching_ray_ban_meta_shot_footage_people_using_bathroom",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Vera Platform by Cortex Research: Your Next Breakthrough, Accelerated by AI",
+        "why": "This platform promises to streamline research processes through AI, a vital direction for enhancing productivity in tech-driven fields.",
+        "source": "producthunt",
+        "url": "https://www.producthunt.com/products/vera-platform-by-cortex-research",
+        "discussion_url": "https://www.producthunt.com/products/vera-platform-by-cortex-research/discussions",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Mozilla is working on a big Firefox redesign, here is what it looks like",
+        "why": "A major update to Firefox could reshape user expectations around web browsers, emphasizing the ongoing competition in UI/UX.",
+        "source": "lobsters",
+        "url": "https://www.neowin.net/news/mozilla-is-working-on-a-big-firefox-redesign-here-is-what-it-looks-like/",
+        "discussion_url": "https://lobste.rs/s/dy7h2t/mozilla_working_on_big_firefox_redesign_here_what_looks_like",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation",
+        "why": "This research reveals how Large Language Models can expose vulnerabilities in information dissemination and the challenge of moderating AI responses.",
+        "source": "technews",
+        "url": "https://arxiv.org/abs/2603.05494v1",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273800",
+        "signal_strength": "medium"
+      }
+    ],
+    "github": {
+      "name": "openclaw/openclaw",
+      "why": "This personal AI assistant is gaining traction for its versatility across platforms, showcasing a significant shift in how we interact with AI.",
+      "url": "https://github.com/openclaw/openclaw"
+    },
+    "arxiv": {
+      "title": "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation",
+      "why": "Understanding the limits and biases of Large Language Models is key for developers and researchers aiming to improve AI reliability.",
+      "url": "https://arxiv.org/abs/2603.05494v1",
+      "category": "cs.AI"
+    },
+    "build_idea": "Develop a privacy-focused tool that alerts users when their data is being potentially compromised by devices like smart glasses.",
+    "_text": "data privacy trends emerging trends in data privacy reveal alarming security gaps in everyday tech. data privacy is on shaky ground as tech blurs the lines of surveillance and personal rights—time to rethink our strategies. develop a privacy-focused tool that alerts users when their data is being potentially compromised by devices like smart glasses. from ukraine to iran, hacking security cameras is now part of war’s ‘playbook’ this piece underscores the increasing weaponization of everyday technology, impacting both privacy and security on a global scale. workers report watching ray-ban meta-shot footage of people using the bathroom this report raises critical questions about privacy and consent in the age of smart glasses, emphasizing the need for stricter regulations. vera platform by cortex research: your next breakthrough, accelerated by ai this platform promises to streamline research processes through ai, a vital direction for enhancing productivity in tech-driven fields. mozilla is working on a big firefox redesign, here is what it looks like a major update to firefox could reshape user expectations around web browsers, emphasizing the ongoing competition in ui/ux. censored llms as a natural testbed for secret knowledge elicitation this research reveals how large language models can expose vulnerabilities in information dissemination and the challenge of moderating ai responses. openclaw/openclaw this personal ai assistant is gaining traction for its versatility across platforms, showcasing a significant shift in how we interact with ai. censored llms as a natural testbed for secret knowledge elicitation understanding the limits and biases of large language models is key for developers and researchers aiming to improve ai reliability."
+  },
+  {
     "issue": 12,
     "date": "2026-03-06",
     "url": "archive/issue-12.html",
