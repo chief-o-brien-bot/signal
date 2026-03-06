@@ -1,5 +1,68 @@
 [
   {
+    "issue": 12,
+    "date": "2026-03-06",
+    "url": "archive/issue-12.html",
+    "theme": "AI in Healthcare",
+    "headline": "Amazon's new AI platform aims to transform healthcare scheduling.",
+    "one_liner": "Amazon is set to revolutionize healthcare scheduling with AI, amid challenges in AI development and major shifts in tech workforce dynamics.",
+    "top_stories": [
+      {
+        "title": "AWS launches a new AI agent platform specifically for healthcare",
+        "why": "Amazon Connect Health is designed to optimize patient scheduling, which could significantly improve efficiency within healthcare systems. This move solidifies AWS's position in the burgeoning healthcare technology sector.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/05/aws-amazon-connect-health-ai-agent-platform-health-care-providers/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273350",
+        "signal_strength": "high"
+      },
+      {
+        "title": "DiligenceSquared uses AI, voice agents to make M&A research affordable",
+        "why": "Leveraging AI to reduce the costs associated with M&A research can democratize access to vital industry insights, giving smaller players more power in competitive markets.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/05/diligencesquared-uses-ai-voice-agents-to-make-ma-research-affordable/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273350",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Jack Dorsey Is Ready to Explain the Block Layoffs",
+        "why": "Dorsey's insights into the massive layoffs at Block offer a rare glimpse into the shifting landscape of tech among rising economic pressures, potentially foreshadowing broader industry trends.",
+        "source": "technews",
+        "url": "https://www.wired.com/story/jack-dorsey-explains-block-layoffs/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273350",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "FBI investigating hack on its wiretap and surveillance systems: Report",
+        "why": "The breach of FBI surveillance systems raises serious concerns about national security and the vulnerabilities inherent in critical technology systems used by law enforcement.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/05/fbi-investigating-hack-on-its-wiretap-and-surveillance-systems-report/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273350",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Why Is Alexa+ So Bad?",
+        "why": "The consumer experience of Alexa+ highlights the challenges tech companies face in evolving AI capabilities amid user expectations, reflecting the ongoing struggle to harmonize innovation with practicality.",
+        "source": "technews",
+        "url": "https://www.wired.com/story/why-is-amazon-alexa-plus-so-bad/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47273350",
+        "signal_strength": "medium"
+      }
+    ],
+    "github": {
+      "name": "Evalcraft",
+      "why": "Evalcraft provides a novel framework for cassette-based testing of AI agents, which can help developers create and refine AI systems more efficiently, minimizing errors and enhancing performance.",
+      "url": "https://github.com/beyhangl/evalcraft"
+    },
+    "arxiv": {
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "why": "This paper addresses crucial efficiency problems in training large language models, which can empower developers to achieve better performance with fewer computational resources.",
+      "url": "https://arxiv.org/abs/2603.05500v1",
+      "category": "cs.LG"
+    },
+    "build_idea": "Develop a scheduling app that integrates with healthcare APIs to streamline patient appointment management using AI.",
+    "_text": "ai in healthcare amazon's new ai platform aims to transform healthcare scheduling. amazon is set to revolutionize healthcare scheduling with ai, amid challenges in ai development and major shifts in tech workforce dynamics. develop a scheduling app that integrates with healthcare apis to streamline patient appointment management using ai. aws launches a new ai agent platform specifically for healthcare amazon connect health is designed to optimize patient scheduling, which could significantly improve efficiency within healthcare systems. this move solidifies aws's position in the burgeoning healthcare technology sector. diligencesquared uses ai, voice agents to make m&a research affordable leveraging ai to reduce the costs associated with m&a research can democratize access to vital industry insights, giving smaller players more power in competitive markets. jack dorsey is ready to explain the block layoffs dorsey's insights into the massive layoffs at block offer a rare glimpse into the shifting landscape of tech among rising economic pressures, potentially foreshadowing broader industry trends. fbi investigating hack on its wiretap and surveillance systems: report the breach of fbi surveillance systems raises serious concerns about national security and the vulnerabilities inherent in critical technology systems used by law enforcement. why is alexa+ so bad? the consumer experience of alexa+ highlights the challenges tech companies face in evolving ai capabilities amid user expectations, reflecting the ongoing struggle to harmonize innovation with practicality. evalcraft evalcraft provides a novel framework for cassette-based testing of ai agents, which can help developers create and refine ai systems more efficiently, minimizing errors and enhancing performance. poet-x: memory-efficient llm training by scaling orthogonal transformation this paper addresses crucial efficiency problems in training large language models, which can empower developers to achieve better performance with fewer computational resources."
+  },
+  {
     "issue": 11,
     "date": "2026-03-06",
     "url": "archive/issue-11.html",
