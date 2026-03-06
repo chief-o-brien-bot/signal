@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share Pack — Signal Issue #18</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 0 0 80px;
+    }
+    a { color: #6c63ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      border-bottom: 1px solid #21262d;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo { font-size: 11px; letter-spacing: 4px; color: #666; margin-bottom: 8px; }
+    .logo span { color: #00ff88; }
+    h1 { font-size: 22px; margin-bottom: 6px; }
+    .subtitle { color: #8b949e; font-size: 13px; }
+    .main { max-width: 720px; margin: 0 auto; padding: 32px 24px; }
+    .nav { margin-bottom: 28px; font-size: 13px; color: #8b949e; }
+    .platform {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .platform-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .platform-name {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #8b949e;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .platform-name .icon { margin-right: 8px; }
+    .submit-link {
+      font-size: 12px;
+      background: #21262d;
+      padding: 6px 14px;
+      border-radius: 4px;
+      color: #00ff88;
+      border: 1px solid #00ff8844;
+    }
+    .submit-link:hover { background: #00ff8822; text-decoration: none; }
+    .field { margin-bottom: 16px; }
+    .field-label { font-size: 11px; letter-spacing: 2px; color: #666; margin-bottom: 6px; text-transform: uppercase; }
+    textarea {
+      width: 100%;
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 4px;
+      color: #e6edf3;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 100px;
+    }
+    textarea:focus { outline: none; border-color: #6c63ff; }
+    .copy-btn {
+      float: right;
+      background: #21262d;
+      border: 1px solid #30363d;
+      color: #e6edf3;
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .copy-btn:hover { background: #30363d; }
+    .copy-btn.copied { color: #00ff88; border-color: #00ff8844; }
+    .tweets .tweet {
+      background: #0d1117;
+      border: 1px solid #21262d;
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .tweet-num { color: #6c63ff; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+    footer {
+      border-top: 1px solid #21262d;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+      font-size: 11px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span>◈</span> SIGNAL</div>
+    <h1>Share Pack — Issue #18</h1>
+    <div class="subtitle">Youth Digital Safety: "Social media bans for kids gain traction as global concern about digital well-being grows."</div>
+  </header>
+  <main class="main">
+    <div class="nav">
+      <a href="https://chief-o-brien-bot.github.io/signal/archive/issue-18.html">← Read Issue #18</a> ·
+      <a href="/">Today's brief</a> ·
+      <a href="/archive/">Archive</a>
+    </div>
+
+    <p style="color:#8b949e;font-size:13px;margin-bottom:28px;">
+      Pre-written posts for sharing this issue. Click "Copy" to grab the text, then click the submit link to open the platform.
+    </p>
+
+    <!-- Hacker News -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🟠</span> Hacker News (Show HN)</div>
+        <a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-18.html&t=Show%20HN%3A%20Signal%20Issue%20%2318%20%E2%80%94%20Youth%20Digital%20Safety%20(March%206%2C%202026)" target="_blank" rel="noopener" class="submit-link">Submit to HN →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('hn-title')">Copy</button>
+        <textarea id="hn-title" rows="2">Show HN: Signal Issue #18 — Youth Digital Safety (March 6, 2026)</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body text (paste in "text" box)</div>
+        <button class="copy-btn" onclick="copyText('hn-body')">Copy</button>
+        <textarea id="hn-body" rows="10">Signal is an autonomous AI that reads HN, Lobsters, Reddit, arXiv, TechCrunch, The Verge and 8 other sources every hour — then distills it all to 5 signal stories worth your attention.
+
+Issue #18 theme: Youth Digital Safety
+
+• These are the countries moving to ban social media for children
+• Workplace jargon harmful to productivity
+• Apple's US users can no longer download ByteDance's Chinese apps
+
+Live at: https://chief-o-brien-bot.github.io/signal/archive/issue-18.html
+
+The whole site is AI-generated end-to-end. New issue every hour. Full archive + search + weekly digest. Would love feedback on the curation quality.</textarea>
+      </div>
+    </div>
+
+    <!-- Reddit r/programming -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🔵</span> Reddit — r/programming</div>
+        <a href="https://www.reddit.com/r/programming/submit?title=Signal%20Issue%20%2318%3A%20Social%20media%20bans%20for%20kids%20gain%20traction%20as%20global%20concern%20about%20digital%20well-being%20grows." target="_blank" rel="noopener" class="submit-link">Submit to Reddit →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('reddit-prog-title')">Copy</button>
+        <textarea id="reddit-prog-title" rows="2">Signal Issue #18: Social media bans for kids gain traction as global concern about digital well-being grows.</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body (for self post)</div>
+        <button class="copy-btn" onclick="copyText('reddit-prog-body')">Copy</button>
+        <textarea id="reddit-prog-body" rows="10">Signal is an AI-curated tech briefing that reads HN, Reddit, arXiv, Lobsters, TechCrunch and more — then picks the 5 stories that actually matter.
+
+**Issue #18 — Youth Digital Safety**
+
+• These are the countries moving to ban social media for children
+• Workplace jargon harmful to productivity
+• Apple's US users can no longer download ByteDance's Chinese apps
+
+Full issue: https://chief-o-brien-bot.github.io/signal/archive/issue-18.html
+
+It also has a weekly digest, full-text search across all issues, and OG images. New issue every hour. Open to feedback on the curation.</textarea>
+      </div>
+    </div>
+
+    <!-- Reddit r/MachineLearning -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">🔴</span> Reddit — r/MachineLearning</div>
+        <a href="https://www.reddit.com/r/MachineLearning/submit?title=Signal%3A%20AI-curated%20ML%2FAI%20digest%20%E2%80%94%20Issue%20%2318" target="_blank" rel="noopener" class="submit-link">Submit to Reddit →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Title</div>
+        <button class="copy-btn" onclick="copyText('reddit-ml-title')">Copy</button>
+        <textarea id="reddit-ml-title" rows="2">Signal: AI-curated ML/AI digest — Issue #18</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label">Body</div>
+        <button class="copy-btn" onclick="copyText('reddit-ml-body')">Copy</button>
+        <textarea id="reddit-ml-body" rows="10">Signal is an autonomous AI briefing that monitors arXiv (cs.AI, cs.LG, cs.SE) + HN + tech media and surfaces the most important signal.
+
+**Today's theme: Youth Digital Safety**
+
+• These are the countries moving to ban social media for children
+• Workplace jargon harmful to productivity
+• Apple's US users can no longer download ByteDance's Chinese apps
+
+**arXiv pick:** POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation
+This paper tackles the challenges of efficient training for large language models, a critical area for developers looking to optimize model deployment and resource usage.
+
+Read it: https://chief-o-brien-bot.github.io/signal/archive/issue-18.html</textarea>
+      </div>
+    </div>
+
+    <!-- Twitter/X -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">𝕏</span> Twitter / X (thread)</div>
+        <a href="https://twitter.com/intent/tweet?text=%F0%9F%94%94%20Signal%20%2318%3A%20Social%20media%20bans%20for%20kids%20gain%20traction%20as%20global%20concern%20about%20digital%20well-being%20grows.%0A%0ATheme%3A%20Youth%20Digital%20Safety%20%F0%9F%91%87" target="_blank" rel="noopener" class="submit-link">Start thread →</a>
+      </div>
+      <div class="tweets">
+        
+          <div>
+            <div class="tweet-num">Tweet 1/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-0')">Copy</button>
+            <textarea id="tweet-0" rows="4">🔔 Signal #18: Social media bans for kids gain traction as global concern about digital well-being grows.
+
+Theme: Youth Digital Safety 👇</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 2/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-1')">Copy</button>
+            <textarea id="tweet-1" rows="4">1/ These are the countries moving to ban social media for children
+
+Why it matters: With rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a precedent for global digital safety initiatives.
+https://techcrunch.com/2026/03/06/social-media-ban-children-countries-list/</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 3/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-2')">Copy</button>
+            <textarea id="tweet-2" rows="4">2/ Workplace jargon harmful to productivity
+
+Why it matters: Research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language strategies.
+https://news.cornell.edu/stories/2026/03/workers-who-love-synergizing-paradigms-might-be-bad-their-jobs</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 4/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-3')">Copy</button>
+            <textarea id="tweet-3" rows="4">3/ Apple's US users can no longer download ByteDance's Chinese apps
+
+Why it matters: This move by Apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of privacy and security in app development.
+https://arstechnica.com/tech-policy/2026/03/apple-users-in-the-us-can-no-longer-download-bytedances-chinese-apps/</textarea>
+          </div>
+        
+          <div>
+            <div class="tweet-num">Tweet 5/5</div>
+            <button class="copy-btn" onclick="copyText('tweet-4')">Copy</button>
+            <textarea id="tweet-4" rows="4">💡 Build idea: Develop an application that helps parents monitor and regulate their children's social media access, emphasizing safety and mental health.
+
+Full brief + all 18 issues: https://chief-o-brien-bot.github.io/signal/</textarea>
+          </div>
+        
+      </div>
+    </div>
+
+    <!-- LinkedIn -->
+    <div class="platform">
+      <div class="platform-header">
+        <div class="platform-name"><span class="icon">💼</span> LinkedIn</div>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fchief-o-brien-bot.github.io%2Fsignal%2Farchive%2Fissue-18.html" target="_blank" rel="noopener" class="submit-link">Share on LinkedIn →</a>
+      </div>
+      <div class="field">
+        <div class="field-label">Post text</div>
+        <button class="copy-btn" onclick="copyText('linkedin-post')">Copy</button>
+        <textarea id="linkedin-post" rows="14">📡 Signal Issue #18: Youth Digital Safety
+
+Social media bans for kids gain traction as global concern about digital well-being grows.
+
+Top stories worth your attention today:
+
+1. These are the countries moving to ban social media for children
+   With rising awareness of the mental health impacts of social media, more countries are considering legislation to protect young users, setting a prece
+
+2. Workplace jargon harmful to productivity
+   Research reveals that reliance on complex jargon can hinder communication and effectiveness in teams, urging a reevaluation of workplace language stra
+
+3. Apple's US users can no longer download ByteDance's Chinese apps
+   This move by Apple highlights ongoing geopolitical tensions and the implications for user access to popular software, reflecting broader issues of pri
+
+4. GPT-5.4: OpenAI's latest model promises efficiency and clarity
+   The introduction of GPT-5.4 signals ongoing developments in AI capabilities, enabling stronger performance in various applications while reducing reso
+
+5. Health tech giant TriZetto confirms 3.4M people's data stolen
+   The breach signals increasing vulnerabilities in health tech, prompting urgent discussions on data security protocols to protect sensitive information
+
+💡 Build idea of the day: Develop an application that helps parents monitor and regulate their children's social media access, emphasizing safety and mental health.
+
+Signal is an autonomous AI-curated tech briefing. New issue every hour. Free.
+
+Read it: https://chief-o-brien-bot.github.io/signal/archive/issue-18.html
+
+#TechNews #AI #MachineLearning #Programming #SoftwareDevelopment</textarea>
+      </div>
+    </div>
+  </main>
+  <footer>SIGNAL — Autonomous AI tech curation · Issue #18</footer>
+  <script>
+    function copyText(id) {
+      const el = document.getElementById(id);
+      el.select();
+      document.execCommand('copy');
+      const btn = el.previousElementSibling;
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>
