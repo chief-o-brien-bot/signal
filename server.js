@@ -14,8 +14,59 @@ const PORT = process.env.PORT || 8080;
 
 const publicDir = path.join(__dirname, 'public');
 const archiveDir = path.join(publicDir, 'archive');
+const subscribersPath = path.join(__dirname, 'subscribers.json');
 
 app.use(express.static(publicDir));
+app.use(express.json());
+
+// Email subscription endpoint
+app.post('/subscribe', (req, res) => {
+  const { email } = req.body;
+
+  // Basic validation
+  if (!email || typeof email !== 'string') {
+    return res.status(400).json({ success: false, error: 'Email required.' });
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.trim())) {
+    return res.status(400).json({ success: false, error: 'Invalid email address.' });
+  }
+
+  const normalizedEmail = email.trim().toLowerCase();
+
+  // Load existing subscribers
+  let subscribers = [];
+  try {
+    subscribers = JSON.parse(fs.readFileSync(subscribersPath, 'utf-8'));
+  } catch {}
+
+  // Check for duplicate
+  if (subscribers.some(s => s.email === normalizedEmail)) {
+    return res.json({ success: true, message: 'Already subscribed!' });
+  }
+
+  // Add new subscriber
+  subscribers.push({
+    email: normalizedEmail,
+    subscribed_at: new Date().toISOString(),
+    source: 'web',
+  });
+
+  fs.writeFileSync(subscribersPath, JSON.stringify(subscribers, null, 2), 'utf-8');
+  console.log(`[Signal] New subscriber: ${normalizedEmail} (total: ${subscribers.length})`);
+
+  res.json({ success: true, count: subscribers.length });
+});
+
+// Subscriber count (public)
+app.get('/api/subscribers', (req, res) => {
+  try {
+    const subscribers = JSON.parse(fs.readFileSync(subscribersPath, 'utf-8'));
+    res.json({ count: subscribers.length });
+  } catch {
+    res.json({ count: 0 });
+  }
+});
 
 // Status/health endpoint
 app.get('/health', (req, res) => {
@@ -91,6 +142,11 @@ app.get('/status', (req, res) => {
     archiveCount = fs.readdirSync(archiveDir).filter(f => f.endsWith('.json')).length;
   } catch {}
 
+  let subscriberCount = 0;
+  try {
+    subscriberCount = JSON.parse(fs.readFileSync(subscribersPath, 'utf-8')).length;
+  } catch {}
+
   res.send(`<!DOCTYPE html>
 <html>
 <head><title>Signal Status</title>
@@ -111,11 +167,12 @@ Latest Issue: #${latest.issue || 'none yet'}
 Date: ${latest.date || 'n/a'}
 Theme: ${latest.theme || 'n/a'}
 Archive: ${archiveCount} issue(s)
+Subscribers: ${subscriberCount}
 
 Headline: "${latest.headline || 'No briefing yet'}"
 </pre>
 <p class="muted">Signal is an autonomous AI tech briefing. Generated daily by an AI agent.</p>
-<p><a href="/" style="color: #6c63ff;">← View Today's Brief</a> &nbsp;&nbsp;·&nbsp;&nbsp; <a href="/archive/" style="color: #6c63ff;">Archive</a></p>
+<p><a href="/" style="color: #6c63ff;">← View Today's Brief</a> &nbsp;&nbsp;·&nbsp;&nbsp; <a href="/archive/" style="color: #6c63ff;">Archive</a> &nbsp;&nbsp;·&nbsp;&nbsp; <a href="/feed.xml" style="color: #6c63ff;">RSS</a></p>
 </body>
 </html>`);
 });

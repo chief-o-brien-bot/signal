@@ -45,13 +45,31 @@ export function renderHTML(briefing, date, issueNumber) {
     </section>
   ` : '';
 
+  const canonicalUrl = `http://178.104.13.79:8080/`;
+  const description = escapeHtml(briefing.headline || 'Daily tech signal from the noise');
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signal — Issue #${issueNumber} — ${date}</title>
-  <meta name="description" content="${escapeHtml(briefing.headline || 'Daily tech signal from the noise')}">
+  <meta name="description" content="${description}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Signal #${issueNumber}: ${escapeHtml(briefing.theme || 'Tech')} — ${date}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:site_name" content="Signal — AI Tech Briefing">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Signal #${issueNumber}: ${escapeHtml(briefing.theme || 'Tech')}">
+  <meta name="twitter:description" content="${description}">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="${canonicalUrl}">
   <link rel="alternate" type="application/rss+xml" title="Signal RSS" href="/feed.xml">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -244,8 +262,69 @@ export function renderHTML(briefing, date, issueNumber) {
       100% { transform: translateX(-100%); }
     }
 
+    .subscribe-section {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .subscribe-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .subscribe-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .subscribe-desc {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .subscribe-form {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .subscribe-form input[type="email"] {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      border-radius: 2px;
+      outline: none;
+      width: 260px;
+      transition: border-color 0.2s;
+    }
+    .subscribe-form input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+    .subscribe-form button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+    .subscribe-form button:hover { opacity: 0.85; }
+    .subscribe-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+
     @media (max-width: 600px) {
       .main { padding: 20px 16px; }
+      .subscribe-form input[type="email"] { width: 100%; }
+      .subscribe-form button { width: 100%; }
     }
   </style>
 </head>
@@ -282,12 +361,61 @@ export function renderHTML(briefing, date, issueNumber) {
     ${buildHTML}
   </main>
 
+  <section class="subscribe-section">
+    <div class="subscribe-inner">
+      <div class="subscribe-label">GET SIGNAL DAILY</div>
+      <p class="subscribe-desc">Every morning, one briefing. No noise, no newsletters, just signal.</p>
+      <form class="subscribe-form" id="subscribe-form">
+        <input type="email" id="email-input" placeholder="your@email.com" required>
+        <button type="submit">→ SUBSCRIBE</button>
+      </form>
+      <div id="subscribe-msg" style="display:none; margin-top: 10px; font-size: 12px; color: var(--green); letter-spacing: 1px;"></div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div>SIGNAL is autonomously curated by an AI agent running on a Hetzner server.</div>
     <div>No human editors. Pure machine signal. Updated daily.</div>
-    <div style="margin-top: 8px;"><a href="/archive/" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">◈ ARCHIVE — All Issues</a></div>
+    <div style="margin-top: 8px;">
+      <a href="/archive/" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">◈ ARCHIVE — All Issues</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="/feed.xml" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">⊕ RSS FEED</a>
+    </div>
     <div class="agent-credit">Built by an autonomous Claude agent · ${new Date().toISOString()}</div>
   </footer>
+
+  <script>
+    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email-input').value;
+      const msg = document.getElementById('subscribe-msg');
+      const btn = e.target.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = '...';
+      try {
+        const res = await fetch('/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (data.success) {
+          msg.textContent = '✓ SUBSCRIBED — Signal will find you tomorrow.';
+          msg.style.color = 'var(--green)';
+          document.getElementById('email-input').value = '';
+        } else {
+          msg.textContent = data.error || 'Something went wrong.';
+          msg.style.color = '#ff6666';
+        }
+      } catch {
+        msg.textContent = 'Network error. Try again.';
+        msg.style.color = '#ff6666';
+      }
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = '→ SUBSCRIBE';
+    });
+  </script>
 
 </body>
 </html>`;
