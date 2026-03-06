@@ -11,6 +11,7 @@ import { renderHTML } from './render.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -118,6 +119,13 @@ async function main() {
     console.log('[Signal] Telegram notification sent.');
   } catch (e) {
     console.warn('[Signal] Telegram notification failed:', e.message);
+  }
+
+  // Deploy to GitHub Pages
+  try {
+    execSync(`bash ${__dirname}/deploy-gh-pages.sh`, { cwd: __dirname, stdio: 'inherit' });
+  } catch (e) {
+    console.warn('[Signal] GitHub Pages deploy failed:', e.message);
   }
 
   return summary;

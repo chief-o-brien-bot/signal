@@ -133,7 +133,7 @@ export async function fetchArXiv(count = 10) {
   return results.slice(0, count);
 }
 
-// Fetch ProductHunt top posts (via RSS)
+// Fetch ProductHunt top posts (via Atom feed)
 export async function fetchProductHunt(count = 10) {
   try {
     const response = await axios.get(
@@ -141,15 +141,28 @@ export async function fetchProductHunt(count = 10) {
       { headers: { 'User-Agent': 'Signal-Agent/1.0' }, timeout: 10000 }
     );
 
-    const parsed = await parseStringPromise(response.data);
-    const items = parsed?.rss?.channel?.[0]?.item || [];
+    // ProductHunt serves an Atom feed (not RSS), so entries are in feed.entry
+    const parsed = await parseStringPromise(response.data, { explicitArray: true });
+    // Handle both namespaced and non-namespaced Atom
+    const feed = parsed?.feed || parsed?.['feed'] || {};
+    const entries = feed.entry || [];
 
-    return items.slice(0, count).map(item => ({
-      title: item.title?.[0]?.replace(/\s+/g, ' ').trim(),
-      url: item.link?.[0],
-      description: item.description?.[0]?.replace(/<[^>]*>/g, '').slice(0, 200).trim(),
-      pubDate: item.pubDate?.[0],
-    })).filter(i => i.title && i.url);
+    return entries.slice(0, count).map(entry => {
+      // Link can be an object with $ attrs or a string
+      const linkEl = Array.isArray(entry.link) ? entry.link[0] : entry.link;
+      const url = typeof linkEl === 'string' ? linkEl : linkEl?.['$']?.href || linkEl?.href?.[0] || '';
+      const rawContent = entry.content?.[0]?._ || entry.content?.[0] || entry.summary?.[0] || '';
+      const description = typeof rawContent === 'string'
+        ? rawContent.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').slice(0, 200).trim()
+        : '';
+
+      return {
+        title: (entry.title?.[0]?._ || entry.title?.[0] || '').replace(/\s+/g, ' ').trim(),
+        url,
+        description,
+        pubDate: entry.published?.[0] || '',
+      };
+    }).filter(i => i.title && i.url);
   } catch (err) {
     return [];
   }
