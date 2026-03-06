@@ -41,9 +41,10 @@ export async function fetchGitHubTrending() {
   };
 
   // Use GitHub search API as fallback since trending page needs scraping
-  // We'll use the GitHub REST API to find recently popular repos
+  // We'll use the GitHub REST API to find recently popular repos (rolling 7-day window)
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   const response = await axios.get(
-    'https://api.github.com/search/repositories?q=stars:>100+pushed:>2026-03-01&sort=stars&order=desc&per_page=10',
+    `https://api.github.com/search/repositories?q=stars:>100+pushed:>${sevenDaysAgo}&sort=stars&order=desc&per_page=10`,
     { headers: { ...headers, 'Accept': 'application/vnd.github.v3+json' } }
   );
 
@@ -130,6 +131,28 @@ export async function fetchArXiv(count = 10) {
   }
 
   return results.slice(0, count);
+}
+
+// Fetch ProductHunt top posts (via RSS)
+export async function fetchProductHunt(count = 10) {
+  try {
+    const response = await axios.get(
+      'https://www.producthunt.com/feed',
+      { headers: { 'User-Agent': 'Signal-Agent/1.0' }, timeout: 10000 }
+    );
+
+    const parsed = await parseStringPromise(response.data);
+    const items = parsed?.rss?.channel?.[0]?.item || [];
+
+    return items.slice(0, count).map(item => ({
+      title: item.title?.[0]?.replace(/\s+/g, ' ').trim(),
+      url: item.link?.[0],
+      description: item.description?.[0]?.replace(/<[^>]*>/g, '').slice(0, 200).trim(),
+      pubDate: item.pubDate?.[0],
+    })).filter(i => i.title && i.url);
+  } catch (err) {
+    return [];
+  }
 }
 
 // Fetch Dev.to top articles (last 7 days)

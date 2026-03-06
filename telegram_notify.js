@@ -36,12 +36,33 @@ async function sendTelegramMessage(text, botToken, chatId) {
   return data;
 }
 
+const SENT_FLAG_PATH = path.join(__dirname, 'public', '.last_telegram_sent');
+
+function alreadySentToday() {
+  try {
+    const lastSent = fs.readFileSync(SENT_FLAG_PATH, 'utf-8').trim();
+    return lastSent === new Date().toISOString().slice(0, 10);
+  } catch {
+    return false;
+  }
+}
+
+function markSentToday() {
+  fs.mkdirSync(path.dirname(SENT_FLAG_PATH), { recursive: true });
+  fs.writeFileSync(SENT_FLAG_PATH, new Date().toISOString().slice(0, 10), 'utf-8');
+}
+
 /**
  * Build and send a Telegram briefing message.
+ * Sends at most once per day — safe to call multiple times.
  * @param {object} summary - from latest.json
  * @param {object} [briefing] - full briefing object (optional, for richer messages)
  */
 export async function notifyTelegram(summary, briefing) {
+  if (alreadySentToday()) {
+    console.log('[Signal/Telegram] Already sent today — skipping.');
+    return;
+  }
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   const CHAT_ID = process.env.GROUP_CHAT_ID;
 
@@ -104,6 +125,7 @@ export async function notifyTelegram(summary, briefing) {
 
   const message = lines.join('\n');
   await sendTelegramMessage(message, BOT_TOKEN, CHAT_ID);
+  markSentToday();
 }
 
 function escapeHtml(str) {

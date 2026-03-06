@@ -393,7 +393,10 @@ export function renderHTML(briefing, date, issueNumber) {
       btn.disabled = true;
       btn.textContent = '...';
       try {
-        const res = await fetch('/subscribe', {
+        const apiBase = window.location.hostname === 'chief-o-brien-bot.github.io'
+          ? 'http://178.104.13.79:8080'
+          : '';
+        const res = await fetch(apiBase + '/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email })

@@ -1,9 +1,9 @@
 {
-  "issue": 3,
+  "issue": 4,
   "date": "2026-03-06",
-  "headline": "Wikipedia's read-only mode highlights critical vulnerabilities in major platforms.",
-  "theme": "Security and AI",
-  "one_liner": "Today's tech landscape is defined by pivotal security breaches and advancements in AI, shaping the future of platforms and privacy.",
+  "headline": "Mass compromise of Wikipedia admin accounts highlights ongoing cybersecurity vulnerabilities.",
+  "theme": "Cybersecurity Concerns",
+  "one_liner": "Today’s tech landscape reveals critical security lapses and emphasizes the need for robust solutions in both software and trade policies.",
   "story_count": 5,
   "arxiv_pick": "Robustness of Agentic AI Systems via Adversarially-Aligned Jacobian Regularization"
 }

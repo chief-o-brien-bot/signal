@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo } from './fetch.js';
+import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt } from './fetch.js';
 import { generateBriefing } from './analyze.js';
 import { renderHTML } from './render.js';
 import fs from 'fs';
@@ -33,20 +33,21 @@ async function main() {
 
   // Fetch all data sources in parallel for speed
   console.log('[Signal] Fetching all data sources in parallel...');
-  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles] = await Promise.all([
+  const [hnStories, githubRepos, hnNew, lobsteStories, arxivPapers, devtoArticles, phPosts] = await Promise.all([
     fetchHackerNews(20).catch(e => { console.warn('[Signal] HN failed:', e.message); return []; }),
     fetchGitHubTrending().catch(e => { console.warn('[Signal] GitHub failed:', e.message); return []; }),
     fetchHNNew(10).catch(e => { console.warn('[Signal] HN New failed:', e.message); return []; }),
     fetchLobsters(20).catch(e => { console.warn('[Signal] Lobsters failed:', e.message); return []; }),
     fetchArXiv(10).catch(e => { console.warn('[Signal] arXiv failed:', e.message); return []; }),
     fetchDevTo(15).catch(e => { console.warn('[Signal] Dev.to failed:', e.message); return []; }),
+    fetchProductHunt(10).catch(e => { console.warn('[Signal] ProductHunt failed:', e.message); return []; }),
   ]);
 
-  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to`);
+  console.log(`[Signal] Got: ${hnStories.length} HN, ${githubRepos.length} GitHub, ${hnNew.length} Show HN, ${lobsteStories.length} Lobsters, ${arxivPapers.length} arXiv, ${devtoArticles.length} Dev.to, ${phPosts.length} ProductHunt`);
 
   // Analyze
   console.log('[Signal] Analyzing with OpenAI...');
-  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles);
+  const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts);
   console.log('[Signal] Briefing generated:', briefing.headline);
 
   // Render
@@ -69,6 +70,7 @@ async function main() {
       lobste_count: lobsteStories.length,
       arxiv_count: arxivPapers.length,
       devto_count: devtoArticles.length,
+      producthunt_count: phPosts.length,
     }
   };
   fs.writeFileSync(path.join(archiveDir, `${today}.json`), JSON.stringify(jsonData, null, 2), 'utf-8');

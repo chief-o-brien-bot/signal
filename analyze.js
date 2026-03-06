@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = []) {
+export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, date, arxivPapers = [], devtoArticles = [], phPosts = []) {
   const hnText = hnStories.slice(0, 15).map((s, i) =>
     `${i+1}. [${s.score} pts, ${s.comments} comments] ${s.title}\n   URL: ${s.url}`
   ).join('\n');
@@ -36,6 +36,12 @@ export async function generateBriefing(hnStories, githubRepos, hnNew, lobsteStor
       ).join('\n')
     : '(no articles fetched)';
 
+  const phText = phPosts.length > 0
+    ? phPosts.slice(0, 8).map((p, i) =>
+        `${i+1}. ${p.title}\n   ${p.description || ''}\n   URL: ${p.url}`
+      ).join('\n')
+    : '(no posts fetched)';
+
   const prompt = `You are Signal — an autonomous AI that reads the entire tech internet and distills it to pure signal.
 
 Today is ${date}.
@@ -57,6 +63,9 @@ ${arxivText}
 
 Dev.to top articles (past week):
 ${devtoText}
+
+ProductHunt top launches (today):
+${phText}
 
 Produce a JSON response with this exact structure:
 {
@@ -88,7 +97,7 @@ Produce a JSON response with this exact structure:
   "one_liner": "A tweet-worthy one-liner summary of today's tech world (<280 chars)"
 }
 
-Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, and Dev.to — pick whichever stories are most interesting regardless of source. For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months.
+Pick the 5 most important stories that represent genuine signal (not noise). Draw from HN, Lobste.rs, Dev.to, and ProductHunt — pick whichever stories are most interesting regardless of source. For arxiv_pick, choose the paper most relevant to what practitioners are building today. Be sharp, opinionated, and direct. Avoid hype. Surface the things that will matter in 6 months. ProductHunt posts can appear in top_stories if they are genuinely interesting product launches.
 
 Return ONLY the JSON object, no markdown fences or extra text.`;
 
