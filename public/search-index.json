@@ -1,5 +1,68 @@
 [
   {
+    "issue": 17,
+    "date": "2026-03-06",
+    "url": "archive/issue-17.html",
+    "theme": "Youth Digital Safety",
+    "headline": "Indonesia moves towards restricting social media access for users under 16 amid growing digital safety concerns.",
+    "one_liner": "As Indonesia gears up to limit under-16s on social media, tech companies must prioritize digital safety innovation to protect youth.",
+    "top_stories": [
+      {
+        "title": "Indonesia outlines plan to limit under-16s’ access to social media",
+        "why": "This legislation reflects an urgent global reassessment of children's digital rights and safety in the face of social media's pervasive influence.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/indonesia-outlines-plan-to-limit-under-16s-access-to-social-media/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47275607",
+        "signal_strength": "high"
+      },
+      {
+        "title": "GPT-5.4 introduces more efficiency with fewer tokens",
+        "why": "OpenAI’s latest model enhances usability and clarity, promising to streamline AI interaction across various applications.",
+        "source": "producthunt",
+        "url": "https://www.producthunt.com/products/openai",
+        "discussion_url": "https://www.producthunt.com/products/openai",
+        "signal_strength": "high"
+      },
+      {
+        "title": "TriZetto confirms 3.4M people’s health and personal data was stolen during breach",
+        "why": "This breach underscores ongoing vulnerabilities in health tech and stresses the critical need for robust consumer data protection mechanisms.",
+        "source": "technews",
+        "url": "https://techcrunch.com/2026/03/06/trizetto-confirms-3-4m-peoples-health-and-personal-data-was-stolen-during-breach/",
+        "discussion_url": "https://news.ycombinator.com/item?id=47275607",
+        "signal_strength": "high"
+      },
+      {
+        "title": "Rust 1.94.0 released with new features and improvements",
+        "why": "This version continues to advance Rust’s capabilities for systems-level programming, catering to developers’ increasing demands for performance and safety.",
+        "source": "reddit",
+        "url": "https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/",
+        "discussion_url": "https://www.reddit.com/r/programming/comments/yourredditpost/",
+        "signal_strength": "medium"
+      },
+      {
+        "title": "Hardening Firefox with Anthropic's Red Team",
+        "why": "Mozilla's collaboration highlights a proactive approach towards enhancing browser security, critical amid rising cyber threats.",
+        "source": "lobsters",
+        "url": "https://blog.mozilla.org/en/firefox/hardening-firefox-anthropic-red-team/",
+        "discussion_url": "https://lobste.rs/s/abcdef/hardening_firefox_with_anthropics_red_team",
+        "signal_strength": "medium"
+      }
+    ],
+    "github": {
+      "name": "libresprite/libresprite",
+      "why": "An open-source pixel art editor that empowers developers and artists to create art and assets freely.",
+      "url": "https://libresprite.github.io/"
+    },
+    "arxiv": {
+      "title": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+      "why": "This research addresses the crucial challenge of efficiently training large language models, paving the way for advances in AI applications.",
+      "url": "https://arxiv.org/abs/2603.05500v1",
+      "category": "cs.AI"
+    },
+    "build_idea": "Create a simple tool to help parents manage their children's social media access in line with new regulations.",
+    "_text": "youth digital safety indonesia moves towards restricting social media access for users under 16 amid growing digital safety concerns. as indonesia gears up to limit under-16s on social media, tech companies must prioritize digital safety innovation to protect youth. create a simple tool to help parents manage their children's social media access in line with new regulations. indonesia outlines plan to limit under-16s’ access to social media this legislation reflects an urgent global reassessment of children's digital rights and safety in the face of social media's pervasive influence. gpt-5.4 introduces more efficiency with fewer tokens openai’s latest model enhances usability and clarity, promising to streamline ai interaction across various applications. trizetto confirms 3.4m people’s health and personal data was stolen during breach this breach underscores ongoing vulnerabilities in health tech and stresses the critical need for robust consumer data protection mechanisms. rust 1.94.0 released with new features and improvements this version continues to advance rust’s capabilities for systems-level programming, catering to developers’ increasing demands for performance and safety. hardening firefox with anthropic's red team mozilla's collaboration highlights a proactive approach towards enhancing browser security, critical amid rising cyber threats. libresprite/libresprite an open-source pixel art editor that empowers developers and artists to create art and assets freely. poet-x: memory-efficient llm training by scaling orthogonal transformation this research addresses the crucial challenge of efficiently training large language models, paving the way for advances in ai applications."
+  },
+  {
     "issue": 16,
     "date": "2026-03-06",
     "url": "archive/issue-16.html",
