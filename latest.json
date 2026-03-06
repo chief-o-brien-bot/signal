@@ -1,9 +1,9 @@
 {
-  "issue": 8,
+  "issue": 10,
   "date": "2026-03-06",
-  "headline": "Wikipedia faces significant security breach, while AI powers new tools and programming languages evolve.",
-  "theme": "Security & AI Development",
-  "one_liner": "From security breaches at Wikipedia to the latest in AI advancements, today's tech world is a mix of challenges and innovation.",
+  "headline": "Wikipedia's recent admin breach highlights significant security challenges in online platforms.",
+  "theme": "Security and AI",
+  "one_liner": "Today's tech landscape grapples with security breaches, AI advancements, and evolving discussions on privacy in the digital age.",
   "story_count": 5,
   "arxiv_pick": "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation"
 }

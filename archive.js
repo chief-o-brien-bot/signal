@@ -133,7 +133,7 @@ export function buildArchiveIndex() {
     <div class="subtitle">${issues.length} issue${issues.length !== 1 ? 's' : ''} generated</div>
   </header>
   <main class="main">
-    <div class="nav"><a href="/">← Today's brief</a></div>
+    <div class="nav"><a href="/">← Today's brief</a> &nbsp;·&nbsp; <a href="/search.html">⌕ Search</a> &nbsp;·&nbsp; <a href="/feed.xml">RSS</a></div>
     <div class="section-label">All Issues</div>
     ${issues.length === 0 ? '<p class="empty">No issues yet.</p>' : `
     <table>

@@ -66,12 +66,16 @@ export function renderHTML(briefing, date, issueNumber) {
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${ghPagesUrl}">
   <meta property="og:site_name" content="Signal — AI Tech Briefing">
+  <meta property="og:image" content="https://chief-o-brien-bot.github.io/signal/og/issue-${issueNumber}.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
   <!-- Twitter/X Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Signal #${issueNumber}: ${escapeHtml(briefing.theme || 'Tech')}">
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:site" content="@signalbriefing">
+  <meta name="twitter:image" content="https://chief-o-brien-bot.github.io/signal/og/issue-${issueNumber}.png">
 
   <!-- Canonical -->
   <link rel="canonical" href="${ghPagesUrl}">
@@ -426,6 +430,8 @@ export function renderHTML(briefing, date, issueNumber) {
     <div>No human editors. Pure machine signal. Updated daily.</div>
     <div style="margin-top: 8px;">
       <a href="/archive/" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">◈ ARCHIVE — All Issues</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      <a href="/search.html" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">⌕ SEARCH</a>
       &nbsp;&nbsp;·&nbsp;&nbsp;
       <a href="/feed.xml" style="color: #6c63ff; font-size: 11px; letter-spacing: 1px;">⊕ RSS FEED</a>
     </div>

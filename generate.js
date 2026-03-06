@@ -8,6 +8,7 @@ import 'dotenv/config';
 import { fetchHackerNews, fetchGitHubTrending, fetchHNNew, fetchLobsters, fetchArXiv, fetchDevTo, fetchProductHunt } from './fetch.js';
 import { generateBriefing } from './analyze.js';
 import { renderHTML } from './render.js';
+import { generateOgImage } from './og_image.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -50,6 +51,24 @@ async function main() {
   console.log('[Signal] Analyzing with OpenAI...');
   const briefing = await generateBriefing(hnStories, githubRepos, hnNew, lobsteStories, today, arxivPapers, devtoArticles, phPosts);
   console.log('[Signal] Briefing generated:', briefing.headline);
+
+  // Generate OG image for social sharing
+  const ogDir = path.join(outputDir, 'og');
+  fs.mkdirSync(ogDir, { recursive: true });
+  const ogImagePath = path.join(ogDir, `issue-${issueNumber}.png`);
+  try {
+    await generateOgImage(
+      issueNumber,
+      briefing.headline,
+      briefing.theme,
+      today,
+      briefing.top_stories || [],
+      ogImagePath
+    );
+    console.log(`[Signal] OG image generated: og/issue-${issueNumber}.png`);
+  } catch (e) {
+    console.warn('[Signal] OG image generation failed:', e.message);
+  }
 
   // Render
   const html = renderHTML(briefing, today, issueNumber);
@@ -147,6 +166,15 @@ async function main() {
     console.log('[Signal] Landing page rebuilt.');
   } catch (e) {
     console.warn('[Signal] Landing page rebuild failed:', e.message);
+  }
+
+  // Rebuild search index
+  try {
+    const { buildSearchIndex } = await import('./build_search_index.js');
+    buildSearchIndex();
+    console.log('[Signal] Search index rebuilt.');
+  } catch (e) {
+    console.warn('[Signal] Search index rebuild failed:', e.message);
   }
 
   // Deploy to GitHub Pages

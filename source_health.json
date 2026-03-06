@@ -1,5 +1,101 @@
 [
   {
+    "checked_at": "2026-03-06T09:05:15.203Z",
+    "sources": {
+      "ProductHunt": {
+        "status": "empty",
+        "count": 0,
+        "latency_ms": 139,
+        "last_checked": "2026-03-06T09:05:15.347Z"
+      },
+      "Hacker News": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 253,
+        "last_checked": "2026-03-06T09:05:15.456Z"
+      },
+      "Show HN": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 287,
+        "last_checked": "2026-03-06T09:05:15.496Z"
+      },
+      "Lobste.rs": {
+        "status": "healthy",
+        "count": 25,
+        "latency_ms": 336,
+        "last_checked": "2026-03-06T09:05:15.541Z"
+      },
+      "Dev.to": {
+        "status": "healthy",
+        "count": 15,
+        "latency_ms": 409,
+        "last_checked": "2026-03-06T09:05:15.616Z"
+      },
+      "GitHub Trending": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 452,
+        "last_checked": "2026-03-06T09:05:15.656Z"
+      },
+      "arXiv": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 459,
+        "last_checked": "2026-03-06T09:05:15.665Z"
+      }
+    },
+    "total_ms": 462
+  },
+  {
+    "checked_at": "2026-03-06T08:02:31.975Z",
+    "sources": {
+      "arXiv": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 49,
+        "last_checked": "2026-03-06T08:02:32.032Z"
+      },
+      "ProductHunt": {
+        "status": "empty",
+        "count": 0,
+        "latency_ms": 162,
+        "last_checked": "2026-03-06T08:02:32.149Z"
+      },
+      "Dev.to": {
+        "status": "healthy",
+        "count": 15,
+        "latency_ms": 180,
+        "last_checked": "2026-03-06T08:02:32.165Z"
+      },
+      "Hacker News": {
+        "status": "healthy",
+        "count": 20,
+        "latency_ms": 261,
+        "last_checked": "2026-03-06T08:02:32.236Z"
+      },
+      "Show HN": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 312,
+        "last_checked": "2026-03-06T08:02:32.301Z"
+      },
+      "Lobste.rs": {
+        "status": "healthy",
+        "count": 25,
+        "latency_ms": 917,
+        "last_checked": "2026-03-06T08:02:32.898Z"
+      },
+      "GitHub Trending": {
+        "status": "healthy",
+        "count": 10,
+        "latency_ms": 2113,
+        "last_checked": "2026-03-06T08:02:34.091Z"
+      }
+    },
+    "total_ms": 2116
+  },
+  {
     "checked_at": "2026-03-06T07:04:57.788Z",
     "sources": {
       "ProductHunt": {
