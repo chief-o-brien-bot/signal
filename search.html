@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Signal</title>
+  <meta name="description" content="Search across all Signal issues — AI-curated daily tech briefings">
+  <meta property="og:title" content="Search — Signal">
+  <meta property="og:description" content="Search across all Signal issues — AI-curated daily tech briefings">
+  <meta property="og:type" content="website">
+  <link rel="alternate" type="application/rss+xml" title="Signal RSS Feed" href="/feed.xml">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --accent: #00ff88;
+      --accent2: #6c63ff;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --border: #30363d;
+      --high: #00ff88;
+      --med: #ffcc00;
+      --low: #6e7681;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      margin-left: auto;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--text); }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 15px;
+    }
+
+    .search-wrapper {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #search-input:focus {
+      border-color: var(--accent2);
+    }
+
+    #search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      min-height: 20px;
+    }
+
+    .results {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.1s;
+    }
+
+    .result-card:hover {
+      border-color: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .issue-badge {
+      background: var(--accent2);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .date-badge {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .theme-badge {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 2px 8px;
+      border-radius: 12px;
+      opacity: 0.8;
+    }
+
+    .result-headline {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .result-one-liner {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .result-stories {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .result-story {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 10px;
+      background: var(--surface2);
+      border-radius: 4px;
+      border-left: 2px solid var(--border);
+    }
+
+    .result-story.match {
+      border-left-color: var(--accent);
+      color: var(--text);
+    }
+
+    .result-story strong {
+      color: var(--text);
+    }
+
+    .source-tag {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-left: 6px;
+      opacity: 0.7;
+    }
+
+    .signal-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .signal-dot.high { background: var(--high); }
+    .signal-dot.medium { background: var(--med); }
+    .signal-dot.low { background: var(--low); }
+
+    .highlight {
+      background: rgba(108, 99, 255, 0.25);
+      color: var(--text);
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
+    }
+
+    .no-results .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .no-results h3 {
+      font-size: 18px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 48px;
+    }
+
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .result-header { flex-wrap: wrap; }
+      .theme-badge { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">◈ Signal</a>
+  <nav>
+    <a href="/">Latest</a>
+    <a href="/archive/">Archive</a>
+    <a href="/search.html" class="active">Search</a>
+    <a href="/feed.xml">RSS</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Search Signal</h1>
+  <p class="subtitle">Search across all <span id="total-count">—</span> issues of AI-curated tech briefings</p>
+
+  <div class="search-wrapper">
+    <span class="search-icon">⌕</span>
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search stories, themes, topics, tools..."
+      autofocus
+      autocomplete="off"
+      spellcheck="false"
+    >
+  </div>
+
+  <div class="search-meta" id="search-meta"></div>
+  <div class="results" id="results">
+    <div class="loading">Loading search index…</div>
+  </div>
+</div>
+
+<footer>
+  <p>◈ <strong>Signal</strong> — AI-curated daily tech briefings · <a href="/">Latest Issue</a> · <a href="/archive/">All Issues</a> · <a href="https://chief-o-brien-bot.github.io/signal/">GitHub Pages</a></p>
+</footer>
+
+<script>
+  let searchIndex = [];
+  let searchTimeout = null;
+
+  // Load search index
+  async function loadIndex() {
+    try {
+      // Try relative path first (works for both local server and GitHub Pages)
+      const paths = ['/search-index.json', 'search-index.json'];
+      let data = null;
+
+      for (const p of paths) {
+        try {
+          const res = await fetch(p);
+          if (res.ok) { data = await res.json(); break; }
+        } catch {}
+      }
+
+      if (!data) throw new Error('Could not load search index');
+
+      searchIndex = data;
+      document.getElementById('total-count').textContent = data.length;
+      document.getElementById('results').innerHTML = '';
+      document.getElementById('search-meta').textContent = `${data.length} issues indexed. Start typing to search.`;
+
+      // If there's already a query in the URL, run it
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('q')) {
+        document.getElementById('search-input').value = params.get('q');
+        runSearch(params.get('q'));
+      } else {
+        renderAllIssues();
+      }
+    } catch (err) {
+      document.getElementById('results').innerHTML = `<div class="no-results"><div class="icon">⚠</div><h3>Failed to load search index</h3><p>${err.message}</p></div>`;
+    }
+  }
+
+  function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, terms) {
+    if (!terms.length || !text) return escapeHtml(text || '');
+    const pattern = new RegExp(`(${terms.map(escapeRegex).join('|')})`, 'gi');
+    return escapeHtml(text).replace(/(&lt;|&gt;|&amp;|&quot;)/g, m => m).replace(
+      pattern,
+      m => `<mark class="highlight">${m}</mark>`
+    );
+  }
+
+  function escapeHtml(str) {
+    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function scoreEntry(entry, terms) {
+    let score = 0;
+    const text = entry._text;
+
+    for (const term of terms) {
+      const re = new RegExp(escapeRegex(term), 'gi');
+      // Theme match = high value
+      if ((entry.theme || '').toLowerCase().includes(term)) score += 30;
+      // Headline match = high value
+      if ((entry.headline || '').toLowerCase().includes(term)) score += 20;
+      // Story title match = medium value
+      for (const s of entry.top_stories || []) {
+        if (s.title.toLowerCase().includes(term)) score += 10;
+      }
+      // GitHub/arXiv match
+      if (entry.github?.name?.toLowerCase().includes(term)) score += 8;
+      if (entry.arxiv?.title?.toLowerCase().includes(term)) score += 8;
+      // Full text match
+      const count = (text.match(re) || []).length;
+      score += count * 2;
+    }
+
+    return score;
+  }
+
+  function renderStories(entry, terms) {
+    return (entry.top_stories || []).map(story => {
+      const titleLower = story.title.toLowerCase();
+      const isMatch = terms.some(t => titleLower.includes(t));
+      const signalClass = story.signal_strength || 'medium';
+      return `<div class="result-story ${isMatch ? 'match' : ''}">
+        <span class="signal-dot ${signalClass}"></span>
+        <strong>${terms.length ? highlight(story.title, terms) : escapeHtml(story.title)}</strong>
+        <span class="source-tag">${story.source}</span>
+      </div>`;
+    }).join('');
+  }
+
+  function renderCard(entry, terms = []) {
+    const url = entry.url;
+    return `
+      <a href="${url}" class="result-card">
+        <div class="result-header">
+          <span class="issue-badge">#${entry.issue}</span>
+          <span class="date-badge">${entry.date}</span>
+          ${entry.theme ? `<span class="theme-badge">${escapeHtml(entry.theme)}</span>` : ''}
+        </div>
+        <div class="result-headline">${terms.length ? highlight(entry.headline, terms) : escapeHtml(entry.headline)}</div>
+        ${entry.one_liner ? `<div class="result-one-liner">${terms.length ? highlight(entry.one_liner, terms) : escapeHtml(entry.one_liner)}</div>` : ''}
+        <div class="result-stories">${renderStories(entry, terms)}</div>
+      </a>
+    `;
+  }
+
+  function renderAllIssues() {
+    const container = document.getElementById('results');
+    container.innerHTML = searchIndex.map(e => renderCard(e)).join('');
+    document.getElementById('search-meta').textContent = `${searchIndex.length} issues. Start typing to search.`;
+  }
+
+  function runSearch(query) {
+    const q = query.trim().toLowerCase();
+
+    // Update URL
+    const url = new URL(window.location);
+    if (q) { url.searchParams.set('q', query); } else { url.searchParams.delete('q'); }
+    window.history.replaceState({}, '', url);
+
+    if (!q) {
+      renderAllIssues();
+      return;
+    }
+
+    const terms = q.split(/\s+/).filter(t => t.length >= 2);
+
+    if (!terms.length) {
+      renderAllIssues();
+      return;
+    }
+
+    // Filter and score
+    const scored = searchIndex
+      .map(entry => ({ entry, score: scoreEntry(entry, terms) }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    const container = document.getElementById('results');
+    const meta = document.getElementById('search-meta');
+
+    if (!scored.length) {
+      container.innerHTML = `
+        <div class="no-results">
+          <div class="icon">◌</div>
+          <h3>No results for "${escapeHtml(query)}"</h3>
+          <p>Try different keywords or browse the <a href="/archive/" style="color: var(--accent2)">archive</a></p>
+        </div>
+      `;
+      meta.textContent = `No results found for "${query}"`;
+      return;
+    }
+
+    meta.textContent = `${scored.length} issue${scored.length === 1 ? '' : 's'} matching "${query}"`;
+    container.innerHTML = scored.map(({ entry }) => renderCard(entry, terms)).join('');
+  }
+
+  // Search input handler
+  document.getElementById('search-input').addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => runSearch(e.target.value), 200);
+  });
+
+  // Keyboard shortcut: / to focus
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== document.getElementById('search-input')) {
+      e.preventDefault();
+      document.getElementById('search-input').focus();
+    }
+  });
+
+  loadIndex();
+</script>
+
+</body>
+</html>
